@@ -44,7 +44,7 @@
     "diff-match-patch": "^1.0.5"
   },
   "devDependencies": {
-    "@istanbuljs/nyc-config-babel": "^1.2.2",
+    "@istanbuljs/nyc-config-babel": "^3.0.0",
     "babel-core": "^6.26.0",
     "babel-eslint": "^10.1.0",
     "babel-plugin-external-helpers": "^6.22.0",
