@@ -1,46 +1,46 @@
 const isArray =
-  typeof Array.isArray === 'function'
+  typeof Array.isArray === "function"
     ? Array.isArray
-    : function(a) {
-      return a instanceof Array;
-    };
+    : function (a) {
+        return a instanceof Array;
+      };
 
 export const diffFilter = function trivialMatchesDiffFilter(context) {
   if (context.left === context.right) {
     context.setResult(undefined).exit();
     return;
   }
-  if (typeof context.left === 'undefined') {
-    if (typeof context.right === 'function') {
-      throw new Error('functions are not supported');
+  if (typeof context.left === "undefined") {
+    if (typeof context.right === "function") {
+      throw new Error("functions are not supported");
     }
     context.setResult([context.right]).exit();
     return;
   }
-  if (typeof context.right === 'undefined') {
+  if (typeof context.right === "undefined") {
     context.setResult([context.left, 0, 0]).exit();
     return;
   }
   if (
-    typeof context.left === 'function' ||
-    typeof context.right === 'function'
+    typeof context.left === "function" ||
+    typeof context.right === "function"
   ) {
-    throw new Error('functions are not supported');
+    throw new Error("functions are not supported");
   }
-  context.leftType = context.left === null ? 'null' : typeof context.left;
-  context.rightType = context.right === null ? 'null' : typeof context.right;
+  context.leftType = context.left === null ? "null" : typeof context.left;
+  context.rightType = context.right === null ? "null" : typeof context.right;
   if (context.leftType !== context.rightType) {
     context.setResult([context.left, context.right]).exit();
     return;
   }
-  if (context.leftType === 'boolean' || context.leftType === 'number') {
+  if (context.leftType === "boolean" || context.leftType === "number") {
     context.setResult([context.left, context.right]).exit();
     return;
   }
-  if (context.leftType === 'object') {
+  if (context.leftType === "object") {
     context.leftIsArray = isArray(context.left);
   }
-  if (context.rightType === 'object') {
+  if (context.rightType === "object") {
     context.rightIsArray = isArray(context.right);
   }
   if (context.leftIsArray !== context.rightIsArray) {
@@ -58,10 +58,10 @@ export const diffFilter = function trivialMatchesDiffFilter(context) {
     }
   }
 };
-diffFilter.filterName = 'trivial';
+diffFilter.filterName = "trivial";
 
 export const patchFilter = function trivialMatchesPatchFilter(context) {
-  if (typeof context.delta === 'undefined') {
+  if (typeof context.delta === "undefined") {
     context.setResult(context.left).exit();
     return;
   }
@@ -88,10 +88,10 @@ export const patchFilter = function trivialMatchesPatchFilter(context) {
     context.setResult(undefined).exit();
   }
 };
-patchFilter.filterName = 'trivial';
+patchFilter.filterName = "trivial";
 
 export const reverseFilter = function trivialReferseFilter(context) {
-  if (typeof context.delta === 'undefined') {
+  if (typeof context.delta === "undefined") {
     context.setResult(context.delta).exit();
     return;
   }
@@ -111,4 +111,4 @@ export const reverseFilter = function trivialReferseFilter(context) {
     context.setResult([context.delta[0]]).exit();
   }
 };
-reverseFilter.filterName = 'trivial';
+reverseFilter.filterName = "trivial";

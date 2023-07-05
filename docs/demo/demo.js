@@ -1,128 +1,128 @@
 (function demo() {
-  const getExampleJson = function() {
+  const getExampleJson = function () {
     const data = {
-      name: 'South America',
+      name: "South America",
       summary:
-        'South America (Spanish: América del Sur, Sudamérica or  \n' +
-        'Suramérica; Portuguese: América do Sul; Quechua and Aymara:  \n' +
-        'Urin Awya Yala; Guarani: Ñembyamérika; Dutch: Zuid-Amerika;  \n' +
-        'French: Amérique du Sud) is a continent situated in the  \n' +
-        'Western Hemisphere, mostly in the Southern Hemisphere, with  \n' +
-        'a relatively small portion in the Northern Hemisphere.  \n' +
-        'The continent is also considered a subcontinent of the  \n' +
-        'Americas.[2][3] It is bordered on the west by the Pacific  \n' +
-        'Ocean and on the north and east by the Atlantic Ocean;  \n' +
-        'North America and the Caribbean Sea lie to the northwest.  \n' +
-        'It includes twelve countries: Argentina, Bolivia, Brazil,  \n' +
-        'Chile, Colombia, Ecuador, Guyana, Paraguay, Peru, Suriname,  \n' +
-        'Uruguay, and Venezuela. The South American nations that  \n' +
-        'border the Caribbean Sea—including Colombia, Venezuela,  \n' +
-        'Guyana, Suriname, as well as French Guiana, which is an  \n' +
-        'overseas region of France—are also known as Caribbean South  \n' +
-        'America. South America has an area of 17,840,000 square  \n' +
-        'kilometers (6,890,000 sq mi). Its population as of 2005  \n' +
-        'has been estimated at more than 371,090,000. South America  \n' +
-        'ranks fourth in area (after Asia, Africa, and North America)  \n' +
-        'and fifth in population (after Asia, Africa, Europe, and  \n' +
-        'North America). The word America was coined in 1507 by  \n' +
-        'cartographers Martin Waldseemüller and Matthias Ringmann,  \n' +
-        'after Amerigo Vespucci, who was the first European to  \n' +
-        'suggest that the lands newly discovered by Europeans were  \n' +
-        'not India, but a New World unknown to Europeans.',
+        "South America (Spanish: América del Sur, Sudamérica or  \n" +
+        "Suramérica; Portuguese: América do Sul; Quechua and Aymara:  \n" +
+        "Urin Awya Yala; Guarani: Ñembyamérika; Dutch: Zuid-Amerika;  \n" +
+        "French: Amérique du Sud) is a continent situated in the  \n" +
+        "Western Hemisphere, mostly in the Southern Hemisphere, with  \n" +
+        "a relatively small portion in the Northern Hemisphere.  \n" +
+        "The continent is also considered a subcontinent of the  \n" +
+        "Americas.[2][3] It is bordered on the west by the Pacific  \n" +
+        "Ocean and on the north and east by the Atlantic Ocean;  \n" +
+        "North America and the Caribbean Sea lie to the northwest.  \n" +
+        "It includes twelve countries: Argentina, Bolivia, Brazil,  \n" +
+        "Chile, Colombia, Ecuador, Guyana, Paraguay, Peru, Suriname,  \n" +
+        "Uruguay, and Venezuela. The South American nations that  \n" +
+        "border the Caribbean Sea—including Colombia, Venezuela,  \n" +
+        "Guyana, Suriname, as well as French Guiana, which is an  \n" +
+        "overseas region of France—are also known as Caribbean South  \n" +
+        "America. South America has an area of 17,840,000 square  \n" +
+        "kilometers (6,890,000 sq mi). Its population as of 2005  \n" +
+        "has been estimated at more than 371,090,000. South America  \n" +
+        "ranks fourth in area (after Asia, Africa, and North America)  \n" +
+        "and fifth in population (after Asia, Africa, Europe, and  \n" +
+        "North America). The word America was coined in 1507 by  \n" +
+        "cartographers Martin Waldseemüller and Matthias Ringmann,  \n" +
+        "after Amerigo Vespucci, who was the first European to  \n" +
+        "suggest that the lands newly discovered by Europeans were  \n" +
+        "not India, but a New World unknown to Europeans.",
 
       surface: 17840000,
       timezone: [-4, -2],
       demographics: {
         population: 385742554,
         largestCities: [
-          'São Paulo',
-          'Buenos Aires',
-          'Rio de Janeiro',
-          'Lima',
-          'Bogotá',
+          "São Paulo",
+          "Buenos Aires",
+          "Rio de Janeiro",
+          "Lima",
+          "Bogotá",
         ],
       },
       languages: [
-        'spanish',
-        'portuguese',
-        'english',
-        'dutch',
-        'french',
-        'quechua',
-        'guaraní',
-        'aimara',
-        'mapudungun',
+        "spanish",
+        "portuguese",
+        "english",
+        "dutch",
+        "french",
+        "quechua",
+        "guaraní",
+        "aimara",
+        "mapudungun",
       ],
       countries: [
         {
-          name: 'Argentina',
-          capital: 'Buenos Aires',
+          name: "Argentina",
+          capital: "Buenos Aires",
           independence: new Date(1816, 6, 9),
           unasur: true,
         },
         {
-          name: 'Bolivia',
-          capital: 'La Paz',
+          name: "Bolivia",
+          capital: "La Paz",
           independence: new Date(1825, 7, 6),
           unasur: true,
         },
         {
-          name: 'Brazil',
-          capital: 'Brasilia',
+          name: "Brazil",
+          capital: "Brasilia",
           independence: new Date(1822, 8, 7),
           unasur: true,
         },
         {
-          name: 'Chile',
-          capital: 'Santiago',
+          name: "Chile",
+          capital: "Santiago",
           independence: new Date(1818, 1, 12),
           unasur: true,
         },
         {
-          name: 'Colombia',
-          capital: 'Bogotá',
+          name: "Colombia",
+          capital: "Bogotá",
           independence: new Date(1810, 6, 20),
           unasur: true,
         },
         {
-          name: 'Ecuador',
-          capital: 'Quito',
+          name: "Ecuador",
+          capital: "Quito",
           independence: new Date(1809, 7, 10),
           unasur: true,
         },
         {
-          name: 'Guyana',
-          capital: 'Georgetown',
+          name: "Guyana",
+          capital: "Georgetown",
           independence: new Date(1966, 4, 26),
           unasur: true,
         },
         {
-          name: 'Paraguay',
-          capital: 'Asunción',
+          name: "Paraguay",
+          capital: "Asunción",
           independence: new Date(1811, 4, 14),
           unasur: true,
         },
         {
-          name: 'Peru',
-          capital: 'Lima',
+          name: "Peru",
+          capital: "Lima",
           independence: new Date(1821, 6, 28),
           unasur: true,
         },
         {
-          name: 'Suriname',
-          capital: 'Paramaribo',
+          name: "Suriname",
+          capital: "Paramaribo",
           independence: new Date(1975, 10, 25),
           unasur: true,
         },
         {
-          name: 'Uruguay',
-          capital: 'Montevideo',
+          name: "Uruguay",
+          capital: "Montevideo",
           independence: new Date(1825, 7, 25),
           unasur: true,
         },
         {
-          name: 'Venezuela',
-          capital: 'Caracas',
+          name: "Venezuela",
+          capital: "Caracas",
           independence: new Date(1811, 6, 5),
           unasur: true,
         },
@@ -132,14 +132,14 @@
     let json = [JSON.stringify(data, null, 2)];
 
     data.summary = data.summary
-      .replace('Brazil', 'Brasil')
-      .replace('also known as', 'a.k.a.');
-    data.languages[2] = 'inglés';
+      .replace("Brazil", "Brasil")
+      .replace("also known as", "a.k.a.");
+    data.languages[2] = "inglés";
     data.countries.pop();
     data.countries.pop();
-    data.countries[0].capital = 'Rawson';
+    data.countries[0].capital = "Rawson";
     data.countries.push({
-      name: 'Antártida',
+      name: "Antártida",
       unasur: false,
     });
 
@@ -150,7 +150,7 @@
     data.countries.splice(2, 0, data.countries.splice(7, 1)[0]);
 
     delete data.surface;
-    data.spanishName = 'Sudamérica';
+    data.spanishName = "Sudamérica";
     data.demographics.population += 2342;
 
     json.push(JSON.stringify(data, null, 2));
@@ -160,97 +160,97 @@
 
   /* global jsondiffpatch */
   const instance = jsondiffpatch.create({
-    objectHash: function(obj, index) {
-      if (typeof obj._id !== 'undefined') {
+    objectHash: function (obj, index) {
+      if (typeof obj._id !== "undefined") {
         return obj._id;
       }
-      if (typeof obj.id !== 'undefined') {
+      if (typeof obj.id !== "undefined") {
         return obj.id;
       }
-      if (typeof obj.name !== 'undefined') {
+      if (typeof obj.name !== "undefined") {
         return obj.name;
       }
-      return '$$index:' + index;
+      return "$$index:" + index;
     },
   });
 
   const dom = {
-    addClass: function(el, className) {
+    addClass: function (el, className) {
       if (el.classList) {
         el.classList.add(className);
       } else {
-        el.className += ' ' + className;
+        el.className += " " + className;
       }
     },
-    removeClass: function(el, className) {
+    removeClass: function (el, className) {
       if (el.classList) {
         el.classList.remove(className);
       } else {
         el.className = el.className.replace(
           new RegExp(
-            '(^|\\b)' + className.split(' ').join('|') + '(\\b|$)',
-            'gi'
+            "(^|\\b)" + className.split(" ").join("|") + "(\\b|$)",
+            "gi"
           ),
-          ' '
+          " "
         );
       }
     },
-    text: function(el, text) {
-      if (typeof el.textContent !== 'undefined') {
-        if (typeof text === 'undefined') {
+    text: function (el, text) {
+      if (typeof el.textContent !== "undefined") {
+        if (typeof text === "undefined") {
           return el.textContent;
         }
         el.textContent = text;
       } else {
-        if (typeof text === 'undefined') {
+        if (typeof text === "undefined") {
           return el.innerText;
         }
         el.innerText = text;
       }
     },
-    on: function(el, eventName, handler) {
+    on: function (el, eventName, handler) {
       if (el.addEventListener) {
         el.addEventListener(eventName, handler);
       } else {
-        el.attachEvent('on' + eventName, handler);
+        el.attachEvent("on" + eventName, handler);
       }
     },
-    ready: function(fn) {
+    ready: function (fn) {
       if (document.addEventListener) {
-        document.addEventListener('DOMContentLoaded', fn);
+        document.addEventListener("DOMContentLoaded", fn);
       } else {
-        document.attachEvent('onreadystatechange', function() {
-          if (document.readyState === 'interactive') {
+        document.attachEvent("onreadystatechange", function () {
+          if (document.readyState === "interactive") {
             fn();
           }
         });
       }
     },
-    getJson: function(url, callback) {
+    getJson: function (url, callback) {
       /* global XMLHttpRequest */
       let request = new XMLHttpRequest();
-      request.open('GET', url, true);
-      request.onreadystatechange = function() {
+      request.open("GET", url, true);
+      request.onreadystatechange = function () {
         if (this.readyState === 4) {
           let data;
           try {
             data = JSON.parse(this.responseText, jsondiffpatch.dateReviver);
           } catch (parseError) {
             // eslint-disable-next-line standard/no-callback-literal
-            return callback('parse error: ' + parseError);
+            return callback("parse error: " + parseError);
           }
           if (this.status >= 200 && this.status < 400) {
             callback(null, data);
           } else {
-            callback(new Error('request failed'), data);
+            callback(new Error("request failed"), data);
           }
         }
       };
       request.send();
       request = null;
     },
-    runScriptTags: function(el) {
-      let scripts = el.querySelectorAll('script');
+    runScriptTags: function (el) {
+      let scripts = el.querySelectorAll("script");
       for (let i = 0; i < scripts.length; i++) {
         let s = scripts[i];
         // eslint-disable-next-line no-eval
@@ -259,41 +259,41 @@
     },
   };
 
-  const trim = function(str) {
-    return str.replace(/^\s+|\s+$/g, '');
+  const trim = function (str) {
+    return str.replace(/^\s+|\s+$/g, "");
   };
 
   const JsonArea = function JsonArea(element) {
     this.element = element;
     this.container = element.parentNode;
     const self = this;
-    const prettifyButton = this.container.querySelector('.prettyfy');
+    const prettifyButton = this.container.querySelector(".prettyfy");
     if (prettifyButton) {
-      dom.on(prettifyButton, 'click', function() {
+      dom.on(prettifyButton, "click", function () {
         self.prettyfy();
       });
     }
   };
 
-  JsonArea.prototype.error = function(err) {
-    const errorElement = this.container.querySelector('.error-message');
+  JsonArea.prototype.error = function (err) {
+    const errorElement = this.container.querySelector(".error-message");
     if (!err) {
-      dom.removeClass(this.container, 'json-error');
-      errorElement.innerHTML = '';
+      dom.removeClass(this.container, "json-error");
+      errorElement.innerHTML = "";
       return;
     }
-    errorElement.innerHTML = err + '';
-    dom.addClass(this.container, 'json-error');
+    errorElement.innerHTML = err + "";
+    dom.addClass(this.container, "json-error");
   };
 
-  JsonArea.prototype.getValue = function() {
+  JsonArea.prototype.getValue = function () {
     if (!this.editor) {
       return this.element.value;
     }
     return this.editor.getValue();
   };
 
-  JsonArea.prototype.parse = function() {
+  JsonArea.prototype.parse = function () {
     const txt = trim(this.getValue());
     try {
       this.error(false);
@@ -312,7 +312,7 @@
     }
   };
 
-  JsonArea.prototype.setValue = function(value) {
+  JsonArea.prototype.setValue = function (value) {
     if (!this.editor) {
       this.element.value = value;
       return;
@@ -320,37 +320,37 @@
     this.editor.setValue(value);
   };
 
-  JsonArea.prototype.prettyfy = function() {
+  JsonArea.prototype.prettyfy = function () {
     const value = this.parse();
     const prettyJson =
-      typeof value === 'string' ? value : JSON.stringify(value, null, 2);
+      typeof value === "string" ? value : JSON.stringify(value, null, 2);
     this.setValue(prettyJson);
   };
 
   /* global CodeMirror */
-  JsonArea.prototype.makeEditor = function(readOnly) {
-    if (typeof CodeMirror === 'undefined') {
+  JsonArea.prototype.makeEditor = function (readOnly) {
+    if (typeof CodeMirror === "undefined") {
       return;
     }
     this.editor = CodeMirror.fromTextArea(this.element, {
-      mode: 'javascript',
+      mode: "javascript",
       json: true,
       readOnly: readOnly,
     });
     if (!readOnly) {
-      this.editor.on('change', compare);
+      this.editor.on("change", compare);
     }
   };
 
   const areas = {
-    left: new JsonArea(document.getElementById('json-input-left')),
-    right: new JsonArea(document.getElementById('json-input-right')),
-    delta: new JsonArea(document.getElementById('json-delta')),
+    left: new JsonArea(document.getElementById("json-input-left")),
+    right: new JsonArea(document.getElementById("json-input-right")),
+    delta: new JsonArea(document.getElementById("json-delta")),
   };
 
-  const compare = function() {
+  const compare = function () {
     let left, right, error;
-    document.getElementById('results').style.display = 'none';
+    document.getElementById("results").style.display = "none";
     try {
       left = areas.left.parse();
     } catch (err) {
@@ -363,183 +363,182 @@
     }
     areas.delta.error(false);
     if (error) {
-      areas.delta.setValue('');
+      areas.delta.setValue("");
       return;
     }
     const selectedType = getSelectedDeltaType();
-    const visualdiff = document.getElementById('visualdiff');
-    const annotateddiff = document.getElementById('annotateddiff');
-    const jsondifflength = document.getElementById('jsondifflength');
+    const visualdiff = document.getElementById("visualdiff");
+    const annotateddiff = document.getElementById("annotateddiff");
+    const jsondifflength = document.getElementById("jsondifflength");
     try {
       const delta = instance.diff(left, right);
 
-      if (typeof delta === 'undefined') {
+      if (typeof delta === "undefined") {
         switch (selectedType) {
-          case 'visual':
-            visualdiff.innerHTML = 'no diff';
+          case "visual":
+            visualdiff.innerHTML = "no diff";
             break;
-          case 'annotated':
-            annotateddiff.innerHTML = 'no diff';
+          case "annotated":
+            annotateddiff.innerHTML = "no diff";
             break;
-          case 'json':
-            areas.delta.setValue('no diff');
-            jsondifflength.innerHTML = '0';
+          case "json":
+            areas.delta.setValue("no diff");
+            jsondifflength.innerHTML = "0";
             break;
         }
       } else {
         switch (selectedType) {
-          case 'visual':
+          case "visual":
             visualdiff.innerHTML = jsondiffpatch.formatters.html.format(
               delta,
               left
             );
-            if (!document.getElementById('showunchanged').checked) {
+            if (!document.getElementById("showunchanged").checked) {
               jsondiffpatch.formatters.html.hideUnchanged();
             }
             dom.runScriptTags(visualdiff);
             break;
-          case 'annotated':
-            annotateddiff.innerHTML = jsondiffpatch.formatters.annotated.format(
-              delta
-            );
+          case "annotated":
+            annotateddiff.innerHTML =
+              jsondiffpatch.formatters.annotated.format(delta);
             break;
-          case 'json':
+          case "json":
             areas.delta.setValue(JSON.stringify(delta, null, 2));
             jsondifflength.innerHTML =
-              Math.round(JSON.stringify(delta).length / 102.4) / 10.0 + '';
+              Math.round(JSON.stringify(delta).length / 102.4) / 10.0 + "";
             break;
         }
       }
     } catch (err) {
-      jsondifflength.innerHTML = '0';
-      visualdiff.innerHTML = '';
-      annotateddiff.innerHTML = '';
-      areas.delta.setValue('');
+      jsondifflength.innerHTML = "0";
+      visualdiff.innerHTML = "";
+      annotateddiff.innerHTML = "";
+      areas.delta.setValue("");
       areas.delta.error(err);
-      if (typeof console !== 'undefined' && console.error) {
+      if (typeof console !== "undefined" && console.error) {
         console.error(err);
         console.error(err.stack);
       }
     }
-    document.getElementById('results').style.display = '';
+    document.getElementById("results").style.display = "";
   };
 
   areas.left.makeEditor();
   areas.right.makeEditor();
 
-  dom.on(areas.left.element, 'change', compare);
-  dom.on(areas.right.element, 'change', compare);
-  dom.on(areas.left.element, 'keyup', compare);
-  dom.on(areas.right.element, 'keyup', compare);
+  dom.on(areas.left.element, "change", compare);
+  dom.on(areas.right.element, "change", compare);
+  dom.on(areas.left.element, "keyup", compare);
+  dom.on(areas.right.element, "keyup", compare);
 
-  const getSelectedDeltaType = function() {
-    if (document.getElementById('show-delta-type-visual').checked) {
-      return 'visual';
+  const getSelectedDeltaType = function () {
+    if (document.getElementById("show-delta-type-visual").checked) {
+      return "visual";
     }
-    if (document.getElementById('show-delta-type-annotated').checked) {
-      return 'annotated';
+    if (document.getElementById("show-delta-type-annotated").checked) {
+      return "annotated";
     }
-    if (document.getElementById('show-delta-type-json').checked) {
-      return 'json';
+    if (document.getElementById("show-delta-type-json").checked) {
+      return "json";
     }
   };
 
-  const showSelectedDeltaType = function() {
+  const showSelectedDeltaType = function () {
     const type = getSelectedDeltaType();
-    document.getElementById('delta-panel-visual').style.display =
-      type === 'visual' ? '' : 'none';
-    document.getElementById('delta-panel-annotated').style.display =
-      type === 'annotated' ? '' : 'none';
-    document.getElementById('delta-panel-json').style.display =
-      type === 'json' ? '' : 'none';
+    document.getElementById("delta-panel-visual").style.display =
+      type === "visual" ? "" : "none";
+    document.getElementById("delta-panel-annotated").style.display =
+      type === "annotated" ? "" : "none";
+    document.getElementById("delta-panel-json").style.display =
+      type === "json" ? "" : "none";
     compare();
   };
 
   dom.on(
-    document.getElementById('show-delta-type-visual'),
-    'click',
+    document.getElementById("show-delta-type-visual"),
+    "click",
     showSelectedDeltaType
   );
   dom.on(
-    document.getElementById('show-delta-type-annotated'),
-    'click',
+    document.getElementById("show-delta-type-annotated"),
+    "click",
     showSelectedDeltaType
   );
   dom.on(
-    document.getElementById('show-delta-type-json'),
-    'click',
+    document.getElementById("show-delta-type-json"),
+    "click",
     showSelectedDeltaType
   );
 
-  dom.on(document.getElementById('swap'), 'click', function() {
+  dom.on(document.getElementById("swap"), "click", function () {
     let leftValue = areas.left.getValue();
     areas.left.setValue(areas.right.getValue());
     areas.right.setValue(leftValue);
     compare();
   });
 
-  dom.on(document.getElementById('clear'), 'click', function() {
-    areas.left.setValue('');
-    areas.right.setValue('');
+  dom.on(document.getElementById("clear"), "click", function () {
+    areas.left.setValue("");
+    areas.right.setValue("");
     compare();
   });
 
-  dom.on(document.getElementById('showunchanged'), 'change', function() {
+  dom.on(document.getElementById("showunchanged"), "change", function () {
     jsondiffpatch.formatters.html.showUnchanged(
-      document.getElementById('showunchanged').checked,
+      document.getElementById("showunchanged").checked,
       null,
       800
     );
   });
 
-  dom.ready(function() {
+  dom.ready(function () {
     setTimeout(compare);
   }, 1);
 
   const load = {};
 
-  load.data = function(dataArg) {
+  load.data = function (dataArg) {
     const data = dataArg || {};
-    dom.text(document.getElementById('description'), data.description || '');
-    if (data.url && trim(data.url).substr(0, 10) !== 'javascript') {
-      document.getElementById('external-link').setAttribute('href', data.url);
-      document.getElementById('external-link').style.display = '';
+    dom.text(document.getElementById("description"), data.description || "");
+    if (data.url && trim(data.url).substr(0, 10) !== "javascript") {
+      document.getElementById("external-link").setAttribute("href", data.url);
+      document.getElementById("external-link").style.display = "";
     } else {
-      document.getElementById('external-link').style.display = 'none';
+      document.getElementById("external-link").style.display = "none";
     }
-    const leftValue = data.left ? data.left.content || data.left : '';
+    const leftValue = data.left ? data.left.content || data.left : "";
     areas.left.setValue(leftValue);
-    const rightValue = data.right ? data.right.content || data.right : '';
+    const rightValue = data.right ? data.right.content || data.right : "";
     areas.right.setValue(rightValue);
 
     dom.text(
-      document.getElementById('json-panel-left').querySelector('h2'),
-      (data.left && data.left.name) || 'left.json'
+      document.getElementById("json-panel-left").querySelector("h2"),
+      (data.left && data.left.name) || "left.json"
     );
     dom.text(
-      document.getElementById('json-panel-right').querySelector('h2'),
-      (data.right && data.right.name) || 'right.json'
+      document.getElementById("json-panel-right").querySelector("h2"),
+      (data.right && data.right.name) || "right.json"
     );
 
     document
-      .getElementById('json-panel-left')
-      .querySelector('h2')
-      .setAttribute('title', (data.left && data.left.fullname) || '');
+      .getElementById("json-panel-left")
+      .querySelector("h2")
+      .setAttribute("title", (data.left && data.left.fullname) || "");
     document
-      .getElementById('json-panel-right')
-      .querySelector('h2')
-      .setAttribute('title', (data.right && data.right.fullname) || '');
+      .getElementById("json-panel-right")
+      .querySelector("h2")
+      .setAttribute("title", (data.right && data.right.fullname) || "");
 
     if (data.error) {
-      areas.left.setValue('ERROR LOADING: ' + data.error);
-      areas.right.setValue('');
+      areas.left.setValue("ERROR LOADING: " + data.error);
+      areas.right.setValue("");
     }
   };
 
-  load.gist = function(id) {
-    dom.getJson('https://api.github.com/gists/' + id, function(error, data) {
+  load.gist = function (id) {
+    dom.getJson("https://api.github.com/gists/" + id, function (error, data) {
       if (error) {
-        let message = error + (data && data.message ? data.message : '');
+        let message = error + (data && data.message ? data.message : "");
         load.data({
           error: message,
         });
@@ -548,7 +547,7 @@
       let filenames = [];
       for (let filename in data.files) {
         let file = data.files[filename];
-        if (file.language === 'JSON') {
+        if (file.language === "JSON") {
           filenames.push(filename);
         }
       }
@@ -570,9 +569,9 @@
     });
   };
 
-  load.leftright = function(descriptionArg, leftValueArg, rightValueArg) {
+  load.leftright = function (descriptionArg, leftValueArg, rightValueArg) {
     try {
-      const description = decodeURIComponent(descriptionArg || '');
+      const description = decodeURIComponent(descriptionArg || "");
       const leftValue = decodeURIComponent(leftValueArg);
       const rightValue = decodeURIComponent(rightValueArg);
       const urlmatch = /https?:\/\/.*\/([^/]+\.json)(?:[?#].*)?/;
@@ -581,10 +580,10 @@
         left: {},
         right: {},
       };
-      const loadIfReady = function() {
+      const loadIfReady = function () {
         if (
-          typeof dataLoaded.left.content !== 'undefined' &&
-          typeof dataLoaded.right.content !== 'undefined'
+          typeof dataLoaded.left.content !== "undefined" &&
+          typeof dataLoaded.right.content !== "undefined"
         ) {
           load.data(dataLoaded);
         }
@@ -592,10 +591,10 @@
       if (urlmatch.test(leftValue)) {
         dataLoaded.left.name = urlmatch.exec(leftValue)[1];
         dataLoaded.left.fullname = leftValue;
-        dom.getJson(leftValue, function(error, data) {
+        dom.getJson(leftValue, function (error, data) {
           if (error) {
             dataLoaded.left.content =
-              error + (data && data.message ? data.message : '');
+              error + (data && data.message ? data.message : "");
           } else {
             dataLoaded.left.content = JSON.stringify(data, null, 2);
           }
@@ -607,10 +606,10 @@
       if (urlmatch.test(rightValue)) {
         dataLoaded.right.name = urlmatch.exec(rightValue)[1];
         dataLoaded.right.fullname = rightValue;
-        dom.getJson(rightValue, function(error, data) {
+        dom.getJson(rightValue, function (error, data) {
           if (error) {
             dataLoaded.right.content =
-              error + (data && data.message ? data.message : '');
+              error + (data && data.message ? data.message : "");
           } else {
             dataLoaded.right.content = JSON.stringify(data, null, 2);
           }
@@ -627,7 +626,7 @@
     }
   };
 
-  load.key = function(key) {
+  load.key = function (key) {
     const matchers = {
       // eslint-disable-next-line max-len
       gist: /^(?:https?:\/\/)?(?:gist\.github\.com\/)?(?:[\w0-9\-a-f]+\/)?([0-9a-f]+)$/i,
@@ -640,7 +639,7 @@
       }
     }
     load.data({
-      error: 'unsupported source: ' + key,
+      error: "unsupported source: " + key,
     });
   };
 
@@ -655,68 +654,68 @@
     });
   }
 
-  dom.on(document.getElementById('examples'), 'change', function() {
+  dom.on(document.getElementById("examples"), "change", function () {
     const example = trim(this.value);
     switch (example) {
-      case 'text':
+      case "text":
         const exampleJson = getExampleJson();
         load.data({
           left: {
-            name: 'left.txt',
+            name: "left.txt",
             content: JSON.parse(exampleJson[0]).summary,
           },
           right: {
-            name: 'right.txt',
+            name: "right.txt",
             content: JSON.parse(exampleJson[1]).summary,
           },
         });
         break;
-      case 'gist':
-        document.location = '?benjamine/9188826';
+      case "gist":
+        document.location = "?benjamine/9188826";
         break;
-      case 'moving':
+      case "moving":
         document.location =
-          '?desc=moving%20around&left=' +
+          "?desc=moving%20around&left=" +
           encodeURIComponent(
             JSON.stringify([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
           ) +
-          '&right=' +
+          "&right=" +
           encodeURIComponent(
             JSON.stringify([10, 0, 1, 7, 2, 4, 5, 6, 88, 9, 3])
           );
         break;
-      case 'query':
+      case "query":
         document.location =
-          '?desc=encoded%20in%20url&left=' +
+          "?desc=encoded%20in%20url&left=" +
           /* jshint quotmark: false */
           encodeURIComponent(
             JSON.stringify({
-              "don't": 'abuse',
-              with: ['large', 'urls'],
+              "don't": "abuse",
+              with: ["large", "urls"],
             })
           ) +
-          '&right=' +
+          "&right=" +
           encodeURIComponent(
             JSON.stringify({
-              "don't": 'use',
-              with: ['>', 2, 'KB urls'],
+              "don't": "use",
+              with: [">", 2, "KB urls"],
             })
           );
         break;
-      case 'urls':
+      case "urls":
         document.location =
-          '?desc=http%20raw%20file%20urls&left=' +
+          "?desc=http%20raw%20file%20urls&left=" +
           encodeURIComponent(
-            'https://rawgithub.com/benjamine/JsonDiffPatch/' +
-              'c83e942971c627f61ef874df3cfdd50a95f1c5a2/package.json'
+            "https://rawgithub.com/benjamine/JsonDiffPatch/" +
+              "c83e942971c627f61ef874df3cfdd50a95f1c5a2/package.json"
           ) +
-          '&right=' +
+          "&right=" +
           encodeURIComponent(
-            'https://rawgithub.com/benjamine/JsonDiffPatch/master/package.json'
+            "https://rawgithub.com/benjamine/JsonDiffPatch/master/package.json"
           );
         break;
       default:
-        document.location = '?';
+        document.location = "?";
         break;
     }
   });

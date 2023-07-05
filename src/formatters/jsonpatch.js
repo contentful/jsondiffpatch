@@ -1,10 +1,10 @@
-import BaseFormatter from './base';
+import BaseFormatter from "./base";
 
 const OPERATIONS = {
-  add: 'add',
-  remove: 'remove',
-  replace: 'replace',
-  move: 'move',
+  add: "add",
+  remove: "remove",
+  replace: "replace",
+  move: "move",
 };
 
 class JSONFormatter extends BaseFormatter {
@@ -17,19 +17,19 @@ class JSONFormatter extends BaseFormatter {
     super.prepareContext(context);
     context.result = [];
     context.path = [];
-    context.pushCurrentOp = function(obj) {
-      const {op, value} = obj;
+    context.pushCurrentOp = function (obj) {
+      const { op, value } = obj;
       const val = {
         op,
         path: this.currentPath(),
       };
-      if (typeof value !== 'undefined') {
+      if (typeof value !== "undefined") {
         val.value = value;
       }
       this.result.push(val);
     };
 
-    context.pushMoveOp = function(to) {
+    context.pushMoveOp = function (to) {
       const from = this.currentPath();
       this.result.push({
         op: OPERATIONS.move,
@@ -38,14 +38,14 @@ class JSONFormatter extends BaseFormatter {
       });
     };
 
-    context.currentPath = function() {
-      return `/${this.path.join('/')}`;
+    context.currentPath = function () {
+      return `/${this.path.join("/")}`;
     };
 
-    context.toPath = function(toPath) {
+    context.toPath = function (toPath) {
       const to = this.path.slice();
       to[to.length - 1] = toPath;
-      return `/${to.join('/')}`;
+      return `/${to.join("/")}`;
     };
   }
 
@@ -76,15 +76,15 @@ class JSONFormatter extends BaseFormatter {
   }
 
   format_added(context, delta) {
-    context.pushCurrentOp({op: OPERATIONS.add, value: delta[0]});
+    context.pushCurrentOp({ op: OPERATIONS.add, value: delta[0] });
   }
 
   format_modified(context, delta) {
-    context.pushCurrentOp({op: OPERATIONS.replace, value: delta[1]});
+    context.pushCurrentOp({ op: OPERATIONS.replace, value: delta[1] });
   }
 
   format_deleted(context) {
-    context.pushCurrentOp({op: OPERATIONS.remove});
+    context.pushCurrentOp({ op: OPERATIONS.remove });
   }
 
   format_moved(context, delta) {
@@ -93,7 +93,7 @@ class JSONFormatter extends BaseFormatter {
   }
 
   format_textdiff() {
-    throw new Error('Not implemented');
+    throw new Error("Not implemented");
   }
 
   format(delta, left) {
@@ -109,7 +109,7 @@ class JSONFormatter extends BaseFormatter {
 
 export default JSONFormatter;
 
-const last = arr => arr[arr.length - 1];
+const last = (arr) => arr[arr.length - 1];
 
 const sortBy = (arr, pred) => {
   arr.sort(pred);
@@ -126,39 +126,44 @@ const compareByIndexDesc = (indexA, indexB) => {
   }
 };
 
-const opsByDescendingOrder = removeOps => sortBy(removeOps, (a, b) => {
-  const splitA = a.path.split('/');
-  const splitB = b.path.split('/');
-  if (splitA.length !== splitB.length) {
-    return splitA.length - splitB.length;
-  } else {
-    return compareByIndexDesc(last(splitA), last(splitB));
-  }
-});
+const opsByDescendingOrder = (removeOps) =>
+  sortBy(removeOps, (a, b) => {
+    const splitA = a.path.split("/");
+    const splitB = b.path.split("/");
+    if (splitA.length !== splitB.length) {
+      return splitA.length - splitB.length;
+    } else {
+      return compareByIndexDesc(last(splitA), last(splitB));
+    }
+  });
 
 export const partitionOps = (arr, fns) => {
-  const initArr = Array(fns.length + 1).fill().map(() => []);
+  const initArr = Array(fns.length + 1)
+    .fill()
+    .map(() => []);
   return arr
-    .map(item => {
-      let position = fns.map(fn => fn(item)).indexOf(true);
+    .map((item) => {
+      let position = fns.map((fn) => fn(item)).indexOf(true);
       if (position < 0) {
         position = fns.length;
       }
       return { item, position };
     })
     .reduce((acc, item) => {
-      acc[ item.position ].push(item.item);
+      acc[item.position].push(item.item);
       return acc;
     }, initArr);
 };
-const isMoveOp = ({op}) => op === 'move';
-const isRemoveOp = ({op}) => op === 'remove';
+const isMoveOp = ({ op }) => op === "move";
+const isRemoveOp = ({ op }) => op === "remove";
 
-const reorderOps = diff => {
-  const [ moveOps, removedOps, restOps ] =
-    partitionOps(diff, [ isMoveOp, isRemoveOp ]);
+const reorderOps = (diff) => {
+  const [moveOps, removedOps, restOps] = partitionOps(diff, [
+    isMoveOp,
+    isRemoveOp,
+  ]);
   const removeOpsReverse = opsByDescendingOrder(removedOps);
-  return [ ...removeOpsReverse, ...moveOps, ...restOps ];
+  return [...removeOpsReverse, ...moveOps, ...restOps];
 };
 
 let defaultInstance;

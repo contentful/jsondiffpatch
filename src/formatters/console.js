@@ -1,4 +1,4 @@
-import BaseFormatter from './base';
+import BaseFormatter from "./base";
 
 class ConsoleFormatter extends BaseFormatter {
   constructor() {
@@ -8,30 +8,30 @@ class ConsoleFormatter extends BaseFormatter {
 
   prepareContext(context) {
     super.prepareContext(context);
-    context.indent = function(levels) {
+    context.indent = function (levels) {
       this.indentLevel =
-        (this.indentLevel || 0) + (typeof levels === 'undefined' ? 1 : levels);
-      this.indentPad = new Array(this.indentLevel + 1).join('  ');
+        (this.indentLevel || 0) + (typeof levels === "undefined" ? 1 : levels);
+      this.indentPad = new Array(this.indentLevel + 1).join("  ");
       this.outLine();
     };
-    context.outLine = function() {
-      this.buffer.push(`\n${this.indentPad || ''}`);
+    context.outLine = function () {
+      this.buffer.push(`\n${this.indentPad || ""}`);
     };
-    context.out = function(...args) {
+    context.out = function (...args) {
       for (let i = 0, l = args.length; i < l; i++) {
-        let lines = args[i].split('\n');
-        let text = lines.join(`\n${this.indentPad || ''}`);
+        let lines = args[i].split("\n");
+        let text = lines.join(`\n${this.indentPad || ""}`);
         if (this.color && this.color[0]) {
           text = this.color[0](text);
         }
         this.buffer.push(text);
       }
     };
-    context.pushColor = function(color) {
+    context.pushColor = function (color) {
       this.color = this.color || [];
       this.color.unshift(color);
     };
-    context.popColor = function() {
+    context.popColor = function () {
       this.color = this.color || [];
       this.color.shift();
     };
@@ -71,32 +71,32 @@ class ConsoleFormatter extends BaseFormatter {
   }
 
   rootBegin(context, type, nodeType) {
-    if (type === 'node') {
-      context.out(nodeType === 'array' ? '[' : '{');
+    if (type === "node") {
+      context.out(nodeType === "array" ? "[" : "{");
       context.indent();
     }
   }
 
   rootEnd(context, type, nodeType) {
-    if (type === 'node') {
+    if (type === "node") {
       context.indent(-1);
-      context.out(nodeType === 'array' ? ']' : '}');
+      context.out(nodeType === "array" ? "]" : "}");
     }
     context.popColor();
   }
 
   nodeBegin(context, key, leftKey, type, nodeType) {
     context.out(`${leftKey}: `);
-    if (type === 'node') {
-      context.out(nodeType === 'array' ? '[' : '{');
+    if (type === "node") {
+      context.out(nodeType === "array" ? "[" : "{");
       context.indent();
     }
   }
 
   nodeEnd(context, key, leftKey, type, nodeType, isLast) {
-    if (type === 'node') {
+    if (type === "node") {
       context.indent(-1);
-      context.out(nodeType === 'array' ? ']' : `}${isLast ? '' : ','}`);
+      context.out(nodeType === "array" ? "]" : `}${isLast ? "" : ","}`);
     }
     if (!isLast) {
       context.outLine();
@@ -108,14 +108,14 @@ class ConsoleFormatter extends BaseFormatter {
   /* eslint-disable camelcase */
 
   format_unchanged(context, delta, left) {
-    if (typeof left === 'undefined') {
+    if (typeof left === "undefined") {
       return;
     }
     this.formatValue(context, left);
   }
 
   format_movedestination(context, delta, left) {
-    if (typeof left === 'undefined') {
+    if (typeof left === "undefined") {
       return;
     }
     this.formatValue(context, left);
@@ -133,7 +133,7 @@ class ConsoleFormatter extends BaseFormatter {
   format_modified(context, delta) {
     this.formatValue(context, delta[0]);
     context.popColor();
-    context.out(' => ');
+    context.out(" => ");
     this.formatValue(context, delta[1]);
     context.popColor();
   }

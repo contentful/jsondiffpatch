@@ -1,4 +1,4 @@
-import Pipe from '../pipe';
+import Pipe from "../pipe";
 
 export default class Context {
   setResult(result) {
@@ -13,7 +13,7 @@ export default class Context {
   }
 
   switchTo(next, pipe) {
-    if (typeof next === 'string' || next instanceof Pipe) {
+    if (typeof next === "string" || next instanceof Pipe) {
       this.nextPipe = next;
     } else {
       this.next = next;
@@ -26,7 +26,7 @@ export default class Context {
 
   push(child, name) {
     child.parent = this;
-    if (typeof name !== 'undefined') {
+    if (typeof name !== "undefined") {
       child.childName = name;
     }
     child.root = this.root || this;

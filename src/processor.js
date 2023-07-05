@@ -13,8 +13,8 @@ class Processor {
 
   pipe(name, pipeArg) {
     let pipe = pipeArg;
-    if (typeof name === 'string') {
-      if (typeof pipe === 'undefined') {
+    if (typeof name === "string") {
+      if (typeof pipe === "undefined") {
         return this.pipes[name];
       } else {
         this.pipes[name] = pipe;
@@ -34,17 +34,17 @@ class Processor {
   process(input, pipe) {
     let context = input;
     context.options = this.options();
-    let nextPipe = pipe || input.pipe || 'default';
+    let nextPipe = pipe || input.pipe || "default";
     let lastPipe;
     let lastContext;
     while (nextPipe) {
-      if (typeof context.nextAfterChildren !== 'undefined') {
+      if (typeof context.nextAfterChildren !== "undefined") {
         // children processed and coming back to parent
         context.next = context.nextAfterChildren;
         context.nextAfterChildren = null;
       }
 
-      if (typeof nextPipe === 'string') {
+      if (typeof nextPipe === "string") {
         nextPipe = this.pipe(nextPipe);
       }
       nextPipe.process(context);

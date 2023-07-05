@@ -1,21 +1,21 @@
-import Processor from './processor';
-import Pipe from './pipe';
-import DiffContext from './contexts/diff';
-import PatchContext from './contexts/patch';
-import ReverseContext from './contexts/reverse';
-import clone from './clone';
+import Processor from "./processor";
+import Pipe from "./pipe";
+import DiffContext from "./contexts/diff";
+import PatchContext from "./contexts/patch";
+import ReverseContext from "./contexts/reverse";
+import clone from "./clone";
 
-import * as trivial from './filters/trivial';
-import * as nested from './filters/nested';
-import * as arrays from './filters/arrays';
-import * as dates from './filters/dates';
-import * as texts from './filters/texts';
+import * as trivial from "./filters/trivial";
+import * as nested from "./filters/nested";
+import * as arrays from "./filters/arrays";
+import * as dates from "./filters/dates";
+import * as texts from "./filters/texts";
 
 class DiffPatcher {
   constructor(options) {
     this.processor = new Processor(options);
     this.processor.pipe(
-      new Pipe('diff')
+      new Pipe("diff")
         .append(
           nested.collectChildrenDiffFilter,
           trivial.diffFilter,
@@ -27,7 +27,7 @@ class DiffPatcher {
         .shouldHaveResult()
     );
     this.processor.pipe(
-      new Pipe('patch')
+      new Pipe("patch")
         .append(
           nested.collectChildrenPatchFilter,
           arrays.collectChildrenPatchFilter,
@@ -39,7 +39,7 @@ class DiffPatcher {
         .shouldHaveResult()
     );
     this.processor.pipe(
-      new Pipe('reverse')
+      new Pipe("reverse")
         .append(
           nested.collectChildrenReverseFilter,
           arrays.collectChildrenReverseFilter,

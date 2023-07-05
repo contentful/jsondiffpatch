@@ -1,10 +1,10 @@
-import Context from './context';
+import Context from "./context";
 
 class ReverseContext extends Context {
   constructor(delta) {
     super();
     this.delta = delta;
-    this.pipe = 'reverse';
+    this.pipe = "reverse";
   }
 }
 

@@ -1,14 +1,14 @@
 /*
 Plugin a new diff filter
 */
-(function() {
-  const assertSame = function() {};
+(function () {
+  const assertSame = function () {};
   /* global jsondiffpatch */
   const diffpatcher = jsondiffpatch.create();
   const NUMERIC_DIFFERENCE = -8;
 
-  const numericDiffFilter = function(context) {
-    if (typeof context.left === 'number' && typeof context.right === 'number') {
+  const numericDiffFilter = function (context) {
+    if (typeof context.left === "number" && typeof context.right === "number") {
       context
         .setResult([0, context.right - context.left, NUMERIC_DIFFERENCE])
         .exit();
@@ -16,21 +16,21 @@ Plugin a new diff filter
   };
   // a filterName is useful if I want to allow other filters to be
   //  inserted before/after this one
-  numericDiffFilter.filterName = 'numeric';
+  numericDiffFilter.filterName = "numeric";
 
   // to decide where to insert your filter you can look at the pipe's
   //   filter list
   assertSame(diffpatcher.processor.pipes.diff.list(), [
-    'collectChildren',
-    'trivial',
-    'dates',
-    'texts',
-    'objects',
-    'arrays',
+    "collectChildren",
+    "trivial",
+    "dates",
+    "texts",
+    "objects",
+    "arrays",
   ]);
 
   // insert my new filter, right before trivial one
-  diffpatcher.processor.pipes.diff.before('trivial', numericDiffFilter);
+  diffpatcher.processor.pipes.diff.before("trivial", numericDiffFilter);
 
   // try it
   const delta = diffpatcher.diff(
@@ -47,7 +47,7 @@ Plugin a new diff filter
   Let's make the corresponding patch filter that will handle the new delta type
 */
 
-  const numericPatchFilter = function(context) {
+  const numericPatchFilter = function (context) {
     if (
       context.delta &&
       Array.isArray(context.delta) &&
@@ -56,8 +56,8 @@ Plugin a new diff filter
       context.setResult(context.left + context.delta[1]).exit();
     }
   };
-  numericPatchFilter.filterName = 'numeric';
-  diffpatcher.processor.pipes.patch.before('trivial', numericPatchFilter);
+  numericPatchFilter.filterName = "numeric";
+  diffpatcher.processor.pipes.patch.before("trivial", numericPatchFilter);
 
   // try it
   const right = diffpatcher.patch(
@@ -82,7 +82,7 @@ To complete the plugin, let's add the reverse filter, so numeric deltas can
 (this is needed for unpatching too)
 */
 
-  const numericReverseFilter = function(context) {
+  const numericReverseFilter = function (context) {
     if (context.nested) {
       return;
     }
@@ -94,8 +94,8 @@ To complete the plugin, let's add the reverse filter, so numeric deltas can
       context.setResult([0, -context.delta[1], NUMERIC_DIFFERENCE]).exit();
     }
   };
-  numericReverseFilter.filterName = 'numeric';
-  diffpatcher.processor.pipes.reverse.after('trivial', numericReverseFilter);
+  numericReverseFilter.filterName = "numeric";
+  diffpatcher.processor.pipes.reverse.after("trivial", numericReverseFilter);
 
   // log pipe steps
   diffpatcher.processor.pipes.reverse.debug = true;

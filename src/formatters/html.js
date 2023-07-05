@@ -1,4 +1,4 @@
-import BaseFormatter from './base';
+import BaseFormatter from "./base";
 
 class HtmlFormatter extends BaseFormatter {
   typeFormattterErrorFormatter(context, err) {
@@ -16,11 +16,7 @@ class HtmlFormatter extends BaseFormatter {
       let line = lines[i];
       context.out(
         `<li><div class="jsondiffpatch-textdiff-location">` +
-          `<span class="jsondiffpatch-textdiff-line-number">${
-            line.location.line
-          }</span><span class="jsondiffpatch-textdiff-char">${
-            line.location.chr
-          }</span></div><div class="jsondiffpatch-textdiff-line">`
+          `<span class="jsondiffpatch-textdiff-line-number">${line.location.line}</span><span class="jsondiffpatch-textdiff-char">${line.location.chr}</span></div><div class="jsondiffpatch-textdiff-line">`
       );
       let pieces = line.pieces;
       for (
@@ -28,7 +24,6 @@ class HtmlFormatter extends BaseFormatter {
         pieceIndex < piecesLength;
         pieceIndex++
       ) {
-        /* global decodeURI */
         let piece = pieces[pieceIndex];
         context.out(
           `<span class="jsondiffpatch-textdiff-${piece.type}">${htmlEscape(
@@ -36,14 +31,14 @@ class HtmlFormatter extends BaseFormatter {
           )}</span>`
         );
       }
-      context.out('</div></li>');
+      context.out("</div></li>");
     }
-    context.out('</ul>');
+    context.out("</ul>");
   }
 
   rootBegin(context, type, nodeType) {
     let nodeClass = `jsondiffpatch-${type}${
-      nodeType ? ` jsondiffpatch-child-node-type-${nodeType}` : ''
+      nodeType ? ` jsondiffpatch-child-node-type-${nodeType}` : ""
     }`;
     context.out(`<div class="jsondiffpatch-delta ${nodeClass}">`);
   }
@@ -54,14 +49,14 @@ class HtmlFormatter extends BaseFormatter {
         context.hasArrows
           ? `<script type="text/javascript">setTimeout(` +
             `${adjustArrows.toString()},10);</script>`
-          : ''
+          : ""
       }`
     );
   }
 
   nodeBegin(context, key, leftKey, type, nodeType) {
     let nodeClass = `jsondiffpatch-${type}${
-      nodeType ? ` jsondiffpatch-child-node-type-${nodeType}` : ''
+      nodeType ? ` jsondiffpatch-child-node-type-${nodeType}` : ""
     }`;
     context.out(
       `<li class="${nodeClass}" data-key="${leftKey}">` +
@@ -70,60 +65,60 @@ class HtmlFormatter extends BaseFormatter {
   }
 
   nodeEnd(context) {
-    context.out('</li>');
+    context.out("</li>");
   }
 
   /* jshint camelcase: false */
   /* eslint-disable camelcase */
 
   format_unchanged(context, delta, left) {
-    if (typeof left === 'undefined') {
+    if (typeof left === "undefined") {
       return;
     }
     context.out('<div class="jsondiffpatch-value">');
     this.formatValue(context, left);
-    context.out('</div>');
+    context.out("</div>");
   }
 
   format_movedestination(context, delta, left) {
-    if (typeof left === 'undefined') {
+    if (typeof left === "undefined") {
       return;
     }
     context.out('<div class="jsondiffpatch-value">');
     this.formatValue(context, left);
-    context.out('</div>');
+    context.out("</div>");
   }
 
   format_node(context, delta, left) {
     // recurse
-    let nodeType = delta._t === 'a' ? 'array' : 'object';
+    let nodeType = delta._t === "a" ? "array" : "object";
     context.out(
       `<ul class="jsondiffpatch-node jsondiffpatch-node-type-${nodeType}">`
     );
     this.formatDeltaChildren(context, delta, left);
-    context.out('</ul>');
+    context.out("</ul>");
   }
 
   format_added(context, delta) {
     context.out('<div class="jsondiffpatch-value">');
     this.formatValue(context, delta[0]);
-    context.out('</div>');
+    context.out("</div>");
   }
 
   format_modified(context, delta) {
     context.out('<div class="jsondiffpatch-value jsondiffpatch-left-value">');
     this.formatValue(context, delta[0]);
     context.out(
-      '</div>' + '<div class="jsondiffpatch-value jsondiffpatch-right-value">'
+      "</div>" + '<div class="jsondiffpatch-value jsondiffpatch-right-value">'
     );
     this.formatValue(context, delta[1]);
-    context.out('</div>');
+    context.out("</div>");
   }
 
   format_deleted(context, delta) {
     context.out('<div class="jsondiffpatch-value">');
     this.formatValue(context, delta[0]);
-    context.out('</div>');
+    context.out("</div>");
   }
 
   format_moved(context, delta) {
@@ -160,18 +155,18 @@ class HtmlFormatter extends BaseFormatter {
   format_textdiff(context, delta) {
     context.out('<div class="jsondiffpatch-value">');
     this.formatTextDiffString(context, delta[0]);
-    context.out('</div>');
+    context.out("</div>");
   }
 }
 
 function htmlEscape(text) {
   let html = text;
   let replacements = [
-    [/&/g, '&amp;'],
-    [/</g, '&lt;'],
-    [/>/g, '&gt;'],
-    [/'/g, '&apos;'],
-    [/"/g, '&quot;'],
+    [/&/g, "&amp;"],
+    [/</g, "&lt;"],
+    [/>/g, "&gt;"],
+    [/'/g, "&apos;"],
+    [/"/g, "&quot;"],
   ];
   for (let i = 0; i < replacements.length; i++) {
     html = html.replace(replacements[i][0], replacements[i][1]);
@@ -180,6 +175,7 @@ function htmlEscape(text) {
 }
 
 let adjustArrows = function jsondiffpatchHtmlFormatterAdjustArrows(nodeArg) {
+  // eslint-disable-next-line no-undef
   const node = nodeArg || document;
   let getElementText = ({ textContent, innerText }) => textContent || innerText;
   let eachByQuery = (el, query, fn) => {
@@ -195,19 +191,19 @@ let adjustArrows = function jsondiffpatchHtmlFormatterAdjustArrows(nodeArg) {
   };
   eachByQuery(
     node,
-    '.jsondiffpatch-arrow',
+    ".jsondiffpatch-arrow",
     ({ parentNode, children, style }) => {
       let arrowParent = parentNode;
       let svg = children[0];
       let path = svg.children[1];
-      svg.style.display = 'none';
+      svg.style.display = "none";
       let destination = getElementText(
-        arrowParent.querySelector('.jsondiffpatch-moved-destination')
+        arrowParent.querySelector(".jsondiffpatch-moved-destination")
       );
       let container = arrowParent.parentNode;
       let destinationElem;
-      eachChildren(container, child => {
-        if (child.getAttribute('data-key') === destination) {
+      eachChildren(container, (child) => {
+        if (child.getAttribute("data-key") === destination) {
           destinationElem = child;
         }
       });
@@ -216,15 +212,17 @@ let adjustArrows = function jsondiffpatchHtmlFormatterAdjustArrows(nodeArg) {
       }
       try {
         let distance = destinationElem.offsetTop - arrowParent.offsetTop;
-        svg.setAttribute('height', Math.abs(distance) + 6);
+        svg.setAttribute("height", Math.abs(distance) + 6);
         style.top = `${-8 + (distance > 0 ? 0 : distance)}px`;
         let curve =
           distance > 0
             ? `M30,0 Q-10,${Math.round(distance / 2)} 26,${distance - 4}`
             : `M30,${-distance} Q-10,${Math.round(-distance / 2)} 26,4`;
-        path.setAttribute('d', curve);
-        svg.style.display = '';
-      } catch (err) {}
+        path.setAttribute("d", curve);
+        svg.style.display = "";
+      } catch (err) {
+        /* empty */
+      }
     }
   );
 };
@@ -233,8 +231,9 @@ let adjustArrows = function jsondiffpatchHtmlFormatterAdjustArrows(nodeArg) {
 /* eslint-enable camelcase */
 
 export const showUnchanged = (show, node, delay) => {
+  // eslint-disable-next-line no-undef
   let el = node || document.body;
-  let prefix = 'jsondiffpatch-unchanged-';
+  let prefix = "jsondiffpatch-unchanged-";
   let classes = {
     showing: `${prefix}showing`,
     hiding: `${prefix}hiding`,

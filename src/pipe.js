@@ -6,7 +6,7 @@ class Pipe {
 
   process(input) {
     if (!this.processor) {
-      throw new Error('add this pipe to a processor before using it');
+      throw new Error("add this pipe to a processor before using it");
     }
     let debug = this.debug;
     let length = this.filters.length;
@@ -17,7 +17,7 @@ class Pipe {
         this.log(`filter: ${filter.filterName}`);
       }
       filter(context);
-      if (typeof context === 'object' && context.exiting) {
+      if (typeof context === "object" && context.exiting) {
         context.exiting = false;
         break;
       }
@@ -43,7 +43,7 @@ class Pipe {
 
   indexOf(filterName) {
     if (!filterName) {
-      throw new Error('a filter name is required');
+      throw new Error("a filter name is required");
     }
     for (let index = 0; index < this.filters.length; index++) {
       let filter = this.filters[index];
@@ -55,14 +55,14 @@ class Pipe {
   }
 
   list() {
-    return this.filters.map(f => f.filterName);
+    return this.filters.map((f) => f.filterName);
   }
 
   after(filterName) {
     let index = this.indexOf(filterName);
     let params = Array.prototype.slice.call(arguments, 1);
     if (!params.length) {
-      throw new Error('a filter is required');
+      throw new Error("a filter is required");
     }
     params.unshift(index + 1, 0);
     Array.prototype.splice.apply(this.filters, params);
@@ -73,7 +73,7 @@ class Pipe {
     let index = this.indexOf(filterName);
     let params = Array.prototype.slice.call(arguments, 1);
     if (!params.length) {
-      throw new Error('a filter is required');
+      throw new Error("a filter is required");
     }
     params.unshift(index, 0);
     Array.prototype.splice.apply(this.filters, params);
@@ -84,7 +84,7 @@ class Pipe {
     let index = this.indexOf(filterName);
     let params = Array.prototype.slice.call(arguments, 1);
     if (!params.length) {
-      throw new Error('a filter is required');
+      throw new Error("a filter is required");
     }
     params.unshift(index, 1);
     Array.prototype.splice.apply(this.filters, params);
@@ -111,7 +111,7 @@ class Pipe {
       return;
     }
     let pipe = this;
-    this.resultCheck = context => {
+    this.resultCheck = (context) => {
       if (!context.hasResult) {
         console.log(context);
         let error = new Error(`${pipe.name} failed`);

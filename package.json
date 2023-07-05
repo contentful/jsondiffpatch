@@ -7,28 +7,25 @@
     "Benjamin Eidelman <beneidel@gmail.com>",
     "Contentful <opensource@contentful.com>"
   ],
-  "browser": "dist/jsondiffpatch.umd.js",
-  "main": "dist/jsondiffpatch.cjs.js",
-  "module": "dist/jsondiffpatch.esm.js",
-  "types": "./dist/index",
-  "files": [
-    "dist",
-    "bin"
-  ],
-  "bin": {
-    "jsondiffpatch": "./bin/jsondiffpatch"
+  "main": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
+  "module": "dist/index.mjs",
+  "exports": {
+    "default": "./dist/index.js",
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs",
+    "node": "./dist/index.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "rollup -c",
-    "build-dist": "rollup -c rollup-dist.config.js",
-    "test-browser": "gulp test-browser",
+    "build": "tsup",
     "lint": "eslint .",
-    "bump": "gulp bump",
-    "test": "nyc mocha",
-    "watch": "nodemon --exec \"mocha\"",
-    "prepublish": "npm run build && npm run build-dist",
-    "cover-report": "open coverage/lcov-report/index.html",
-    "cover-publish": "nyc mocha && codeclimate < coverage/lcov.info",
+    "lint-fix": "npm run lint -- --fix",
+    "test": "ts-mocha -p tsconfig.json test/**/*.{js,ts}",
+    "test-watch": "npm run test -- --watch",
+    "prepublish": "npm run build",
     "semantic-release": "semantic-release"
   },
   "repository": {
@@ -44,44 +41,39 @@
     "diff-match-patch": "^1.0.5"
   },
   "devDependencies": {
-    "@istanbuljs/nyc-config-babel": "^1.2.2",
-    "babel-core": "^6.26.0",
-    "babel-eslint": "^10.1.0",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-plugin-istanbul": "^6.1.1",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "babel-preset-stage-0": "^6.24.1",
-    "babel-preset-stage-1": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@typescript-eslint/parser": "^5.52.0",
     "chai": "^4.3.7",
-    "codeclimate-test-reporter": "^0.5.1",
-    "eslint": "^8.36.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.27.5",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-standard": "^5.0.0",
-    "istanbul": "^0.4.5",
-    "mkdirp": "^0.5.1",
-    "mocha": "^5.0.0",
-    "nodemon": "^2.0.21",
-    "npm-check": "^6.0.1",
-    "nyc": "^15.1.0",
-    "prettier": "^2.8.4",
-    "rollup": "^0.54.1",
-    "rollup-plugin-babel": "^3.0.3",
-    "rollup-plugin-commonjs": "^8.2.6",
-    "rollup-plugin-istanbul": "^2.0.0",
-    "rollup-plugin-node-resolve": "^3.0.2",
-    "rollup-plugin-replace": "^2.0.0",
-    "rollup-plugin-visualizer": "^0.8.0",
-    "semantic-release": "^20.1"
+    "eslint": "^8.44.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.0",
+    "mocha": "^10.2.0",
+    "prettier": "^2.8.8",
+    "semantic-release": "^21.0.7",
+    "ts-mocha": "^10.0.0",
+    "tsup": "^7.1.0",
+    "typescript": "^5.1.6"
   },
   "license": "MIT",
   "engines": {
     "node": ">=18"
+  },
+  "prettier": {
+    "semi": true,
+    "singleQuote": false
+  },
+  "tsup": {
+    "entry": [
+      "src/index.ts"
+    ],
+    "format": [
+      "cjs",
+      "esm"
+    ],
+    "clean": true,
+    "dts": true
   },
   "release": {
     "branches": [

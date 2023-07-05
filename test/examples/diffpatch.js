@@ -39,9 +39,9 @@ examples.atomicValues = [
   },
   {
     left: undefined,
-    right: 'some text',
-    delta: ['some text'],
-    reverse: ['some text', 0, 0],
+    right: "some text",
+    delta: ["some text"],
+    reverse: ["some text", 0, 0],
   },
   {
     left: undefined,
@@ -111,9 +111,9 @@ examples.atomicValues = [
   },
   {
     left: null,
-    right: 'some text',
-    delta: [null, 'some text'],
-    reverse: ['some text', null],
+    right: "some text",
+    delta: [null, "some text"],
+    reverse: ["some text", null],
   },
   {
     left: null,
@@ -171,9 +171,9 @@ examples.atomicValues = [
   },
   {
     left: false,
-    right: 'some text',
-    delta: [false, 'some text'],
-    reverse: ['some text', false],
+    right: "some text",
+    delta: [false, "some text"],
+    reverse: ["some text", false],
   },
   {
     left: false,
@@ -231,9 +231,9 @@ examples.atomicValues = [
   },
   {
     left: true,
-    right: 'some text',
-    delta: [true, 'some text'],
-    reverse: ['some text', true],
+    right: "some text",
+    delta: [true, "some text"],
+    reverse: ["some text", true],
   },
   {
     left: true,
@@ -278,7 +278,7 @@ examples.atomicValues = [
 
   // number
   {
-    name: 'number -> same number',
+    name: "number -> same number",
     left: 42,
     right: 42,
     delta: undefined,
@@ -292,9 +292,9 @@ examples.atomicValues = [
   },
   {
     left: 42,
-    right: 'some text',
-    delta: [42, 'some text'],
-    reverse: ['some text', 42],
+    right: "some text",
+    delta: [42, "some text"],
+    reverse: ["some text", 42],
   },
   {
     left: 42,
@@ -339,32 +339,32 @@ examples.atomicValues = [
 
   // string
   {
-    name: 'string -> same string',
-    left: 'some text',
-    right: 'some text',
+    name: "string -> same string",
+    left: "some text",
+    right: "some text",
     delta: undefined,
     reverse: undefined,
   },
   {
-    left: 'some text',
-    right: 'some fext',
-    delta: ['some text', 'some fext'],
-    reverse: ['some fext', 'some text'],
+    left: "some text",
+    right: "some fext",
+    delta: ["some text", "some fext"],
+    reverse: ["some fext", "some text"],
   },
   {
-    left: 'some text',
+    left: "some text",
     right: exampleDate(),
-    delta: ['some text', exampleDate()],
-    reverse: [exampleDate(), 'some text'],
+    delta: ["some text", exampleDate()],
+    reverse: [exampleDate(), "some text"],
   },
   {
-    left: 'some text',
+    left: "some text",
     right: {
       a: 1,
       b: 2,
     },
     delta: [
-      'some text',
+      "some text",
       {
         a: 1,
         b: 2,
@@ -375,19 +375,19 @@ examples.atomicValues = [
         a: 1,
         b: 2,
       },
-      'some text',
+      "some text",
     ],
   },
   {
-    left: 'some text',
+    left: "some text",
     right: [1, 2, 3],
-    delta: ['some text', [1, 2, 3]],
-    reverse: [[1, 2, 3], 'some text'],
+    delta: ["some text", [1, 2, 3]],
+    reverse: [[1, 2, 3], "some text"],
   },
 
   // Date
   {
-    name: 'Date -> same Date',
+    name: "Date -> same Date",
     left: exampleDate(),
     right: exampleDate(),
     delta: undefined,
@@ -436,8 +436,8 @@ examples.atomicValues = [
 
   // Function
   {
-    name: 'string -> Function',
-    left: 'some text',
+    name: "string -> Function",
+    left: "some text",
     right(x) {
       return x * x;
     },
@@ -446,16 +446,16 @@ examples.atomicValues = [
 
   // RegExp
   {
-    name: 'RegExp -> RegExp',
+    name: "RegExp -> RegExp",
     left: /regex/g,
     right: /another regex/gi,
-    delta: ['/regex/g', '/another regex/gi'],
-    reverse: ['/another regex/gi', '/regex/g'],
+    delta: ["/regex/g", "/another regex/gi"],
+    reverse: ["/another regex/gi", "/regex/g"],
   },
 
   // object
   {
-    name: 'object -> same object',
+    name: "object -> same object",
     left: {
       a: 1,
       b: 2,
@@ -501,7 +501,7 @@ examples.atomicValues = [
 
   // array
   {
-    name: 'array -> same array',
+    name: "array -> same array",
     left: [1, 2, 3],
     right: [1, 2, 3],
     delta: undefined,
@@ -572,47 +572,47 @@ examples.text = [
   },
   {
     left: largeText,
-    right: largeText.replace(/jazminero/g, 'rosal'),
+    right: largeText.replace(/jazminero/g, "rosal"),
     delta: [
-      '@@ -360,25 +360,21 @@\n %C3%A9ste un \n-jazminero\n+rosal' +
-        '\n %0Ay %C3%A9se e\n@@ -479,17 +479,13 @@\n' +
-        ' al, \n-jazminero\n+rosal\n ).%0A%0A\n',
+      "@@ -360,25 +360,21 @@\n %C3%A9ste un \n-jazminero\n+rosal" +
+        "\n %0Ay %C3%A9se e\n@@ -479,17 +479,13 @@\n" +
+        " al, \n-jazminero\n+rosal\n ).%0A%0A\n",
       0,
       2,
     ],
     reverse: [
-      '@@ -360,21 +360,25 @@\n %C3%A9ste un \n-rosal\n+jazminero\n %0Ay' +
-        ' %C3%A9se e\n@@ -479,21 +479,25 @@\n %0Arosal,' +
-        ' \n-rosal\n+jazminero\n ).%0A%0A-Mad\n',
+      "@@ -360,21 +360,25 @@\n %C3%A9ste un \n-rosal\n+jazminero\n %0Ay" +
+        " %C3%A9se e\n@@ -479,21 +479,25 @@\n %0Arosal," +
+        " \n-rosal\n+jazminero\n ).%0A%0A-Mad\n",
       0,
       2,
     ],
     exactReverse: false,
   },
   {
-    name: 'larger than min length',
+    name: "larger than min length",
     options: {
       textDiff: {
         minLength: 10,
       },
     },
     left: largeText.substr(0, 10),
-    right: largeText.substr(0, 11).replace(/Madre/g, 'Padre'),
-    delta: ['@@ -1,10 +1,11 @@\n -\n-M\n+P\n adre,%0Acu\n+a\n', 0, 2],
-    reverse: ['@@ -1,11 +1,10 @@\n -\n-P\n+M\n adre,%0Acu\n-a\n', 0, 2],
+    right: largeText.substr(0, 11).replace(/Madre/g, "Padre"),
+    delta: ["@@ -1,10 +1,11 @@\n -\n-M\n+P\n adre,%0Acu\n+a\n", 0, 2],
+    reverse: ["@@ -1,11 +1,10 @@\n -\n-P\n+M\n adre,%0Acu\n-a\n", 0, 2],
     exactReverse: false,
   },
   {
-    name: 'shorter than min length',
+    name: "shorter than min length",
     options: {
       textDiff: {
         minLength: 10,
       },
     },
     left: largeText.substr(0, 9),
-    right: largeText.substr(0, 11).replace(/Madre/g, 'Padre'),
-    delta: ['-Madre,\nc', '-Padre,\ncua'],
-    reverse: ['-Padre,\ncua', '-Madre,\nc'],
+    right: largeText.substr(0, 11).replace(/Madre/g, "Padre"),
+    delta: ["-Madre,\nc", "-Padre,\ncua"],
+    reverse: ["-Padre,\ncua", "-Madre,\nc"],
     exactReverse: false,
   },
   0,
@@ -620,7 +620,7 @@ examples.text = [
 
 examples.objects = [
   {
-    name: 'first level',
+    name: "first level",
     left: {
       a: 1,
       b: 2,
@@ -637,7 +637,7 @@ examples.objects = [
     },
   },
   {
-    name: 'deep level',
+    name: "deep level",
     left: {
       a: {
         j: {
@@ -702,7 +702,7 @@ examples.objects = [
     },
   },
   {
-    name: 'multiple changes',
+    name: "multiple changes",
     left: {
       a: {
         j: {
@@ -773,7 +773,7 @@ examples.objects = [
     },
   },
   {
-    name: 'key removed',
+    name: "key removed",
     left: {
       a: 1,
       b: 2,
@@ -789,7 +789,7 @@ examples.objects = [
     },
   },
   {
-    name: 'hasOwnProperty',
+    name: "hasOwnProperty",
     /* jshint ignore:start */
     left: {
       hasOwnProperty: true,
@@ -804,18 +804,18 @@ examples.objects = [
 
 examples.arrays = [
   {
-    name: 'simple values',
+    name: "simple values",
     left: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     right: [1, 3, 4, 5, 8, 9, 9.1, 10],
     delta: {
-      _t: 'a',
+      _t: "a",
       _1: [2, 0, 0],
       _5: [6, 0, 0],
       _6: [7, 0, 0],
       6: [9.1],
     },
     reverse: {
-      _t: 'a',
+      _t: "a",
       1: [2],
       5: [6],
       6: [7],
@@ -823,55 +823,55 @@ examples.arrays = [
     },
   },
   {
-    name: 'added block',
+    name: "added block",
     left: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     right: [1, 2, 3, 4, 5, 5.1, 5.2, 5.3, 6, 7, 8, 9, 10],
     delta: {
-      _t: 'a',
+      _t: "a",
       5: [5.1],
       6: [5.2],
       7: [5.3],
     },
     reverse: {
-      _t: 'a',
+      _t: "a",
       _5: [5.1, 0, 0],
       _6: [5.2, 0, 0],
       _7: [5.3, 0, 0],
     },
   },
   {
-    name: 'movements',
+    name: "movements",
     left: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     right: [1, 2, 3, 7, 5, 6, 8, 9, 4, 10],
     delta: {
-      _t: 'a',
-      _3: ['', 8, 3],
-      _6: ['', 3, 3],
+      _t: "a",
+      _3: ["", 8, 3],
+      _6: ["", 3, 3],
     },
     reverse: {
-      _t: 'a',
-      _3: ['', 6, 3],
-      _8: ['', 3, 3],
+      _t: "a",
+      _3: ["", 6, 3],
+      _8: ["", 3, 3],
     },
   },
   {
-    name: 'movements(2)',
+    name: "movements(2)",
     left: [1, 2, 3, 4],
     right: [2, 4, 1, 3],
     delta: {
-      _t: 'a',
-      _1: ['', 0, 3],
-      _3: ['', 1, 3],
+      _t: "a",
+      _1: ["", 0, 3],
+      _3: ["", 1, 3],
     },
     reverse: {
-      _t: 'a',
-      _2: ['', 0, 3],
-      _3: ['', 2, 3],
+      _t: "a",
+      _2: ["", 0, 3],
+      _3: ["", 2, 3],
     },
     exactReverse: false,
   },
   {
-    name: 'nested',
+    name: "nested",
     options: {
       objectHash(obj) {
         if (obj && obj.id) {
@@ -888,7 +888,7 @@ examples.arrays = [
       },
       4,
       {
-        id: 'five',
+        id: "five",
         width: 4,
       },
       6,
@@ -906,7 +906,7 @@ examples.arrays = [
       },
       4,
       {
-        id: 'five',
+        id: "five",
         width: 4,
       },
       6,
@@ -916,20 +916,20 @@ examples.arrays = [
       10,
     ],
     delta: {
-      _t: 'a',
+      _t: "a",
       2: {
         width: [10, 12],
       },
     },
     reverse: {
-      _t: 'a',
+      _t: "a",
       2: {
         width: [12, 10],
       },
     },
   },
   {
-    name: 'nested with movement',
+    name: "nested with movement",
     options: {
       objectHash(obj) {
         if (obj && obj.id) {
@@ -942,7 +942,7 @@ examples.arrays = [
       2,
       4,
       {
-        id: 'five',
+        id: "five",
         width: 4,
       },
       6,
@@ -965,7 +965,7 @@ examples.arrays = [
       },
       4,
       {
-        id: 'five',
+        id: "five",
         width: 4,
       },
       6,
@@ -975,24 +975,24 @@ examples.arrays = [
       10,
     ],
     delta: {
-      _t: 'a',
+      _t: "a",
       2: {
         width: [10, 12],
         height: [3, 0, 0],
       },
-      _7: ['', 2, 3],
+      _7: ["", 2, 3],
     },
     reverse: {
-      _t: 'a',
+      _t: "a",
       7: {
         width: [12, 10],
         height: [3],
       },
-      _2: ['', 7, 3],
+      _2: ["", 7, 3],
     },
   },
   {
-    name: 'nested changes among array insertions and deletions',
+    name: "nested changes among array insertions and deletions",
     options: {
       objectHash(obj) {
         if (obj && obj.id) {
@@ -1016,7 +1016,7 @@ examples.arrays = [
       {
         id: 6,
         inner: {
-          property: 'abc',
+          property: "abc",
         },
       },
       {
@@ -1045,7 +1045,7 @@ examples.arrays = [
       {
         id: 6,
         inner: {
-          property: 'abcd',
+          property: "abcd",
         },
       },
       {
@@ -1053,11 +1053,11 @@ examples.arrays = [
       },
     ],
     delta: {
-      _t: 'a',
+      _t: "a",
       0: [{ id: 3 }],
       2: {
         inner: {
-          property: ['abc', 'abcd'],
+          property: ["abc", "abcd"],
         },
       },
       3: [{ id: 9 }],
@@ -1071,13 +1071,13 @@ examples.arrays = [
       _9: [{ id: 12 }, 0, 0],
     },
     reverse: {
-      _t: 'a',
+      _t: "a",
       0: [{ id: 1 }],
       1: [{ id: 2 }],
       3: [{ id: 5 }],
       4: {
         inner: {
-          property: ['abcd', 'abc'],
+          property: ["abcd", "abc"],
         },
       },
       5: [{ id: 7 }],
@@ -1090,7 +1090,7 @@ examples.arrays = [
     },
   },
   {
-    name: 'nested change with item moved above',
+    name: "nested change with item moved above",
     options: {
       objectHash(obj) {
         if (obj && obj.id) {
@@ -1108,7 +1108,7 @@ examples.arrays = [
       {
         id: 3,
         inner: {
-          property: 'abc',
+          property: "abc",
         },
       },
       {
@@ -1134,7 +1134,7 @@ examples.arrays = [
       {
         id: 3,
         inner: {
-          property: 'abcd',
+          property: "abcd",
         },
       },
       {
@@ -1145,26 +1145,26 @@ examples.arrays = [
       },
     ],
     delta: {
-      _t: 'a',
+      _t: "a",
       3: {
         inner: {
-          property: ['abc', 'abcd'],
+          property: ["abc", "abcd"],
         },
       },
-      _5: ['', 2, 3],
+      _5: ["", 2, 3],
     },
     reverse: {
-      _t: 'a',
+      _t: "a",
       2: {
         inner: {
-          property: ['abcd', 'abc'],
+          property: ["abcd", "abc"],
         },
       },
-      _2: ['', 5, 3],
+      _2: ["", 5, 3],
     },
   },
   {
-    name: 'nested change with item moved right above',
+    name: "nested change with item moved right above",
     options: {
       objectHash(obj) {
         if (obj && obj.id) {
@@ -1179,7 +1179,7 @@ examples.arrays = [
       {
         id: 2,
         inner: {
-          property: 'abc',
+          property: "abc",
         },
       },
       {
@@ -1196,32 +1196,32 @@ examples.arrays = [
       {
         id: 2,
         inner: {
-          property: 'abcd',
+          property: "abcd",
         },
       },
     ],
     delta: {
-      _t: 'a',
+      _t: "a",
       2: {
         inner: {
-          property: ['abc', 'abcd'],
+          property: ["abc", "abcd"],
         },
       },
-      _2: ['', 1, 3],
+      _2: ["", 1, 3],
     },
     reverse: {
-      _t: 'a',
+      _t: "a",
       1: {
         inner: {
-          property: ['abcd', 'abc'],
+          property: ["abcd", "abc"],
         },
       },
-      _2: ['', 1, 3],
+      _2: ["", 1, 3],
     },
     exactReverse: false,
   },
   {
-    name: 'nested change with item moved right below',
+    name: "nested change with item moved right below",
     options: {
       objectHash(obj) {
         if (obj && obj.id) {
@@ -1239,7 +1239,7 @@ examples.arrays = [
       {
         id: 3,
         inner: {
-          property: 'abc',
+          property: "abc",
         },
       },
       {
@@ -1253,7 +1253,7 @@ examples.arrays = [
       {
         id: 3,
         inner: {
-          property: 'abcd',
+          property: "abcd",
         },
       },
       {
@@ -1264,26 +1264,26 @@ examples.arrays = [
       },
     ],
     delta: {
-      _t: 'a',
+      _t: "a",
       1: {
         inner: {
-          property: ['abc', 'abcd'],
+          property: ["abc", "abcd"],
         },
       },
-      _0: ['', 2, 3],
+      _0: ["", 2, 3],
     },
     reverse: {
-      _t: 'a',
+      _t: "a",
       2: {
         inner: {
-          property: ['abcd', 'abc'],
+          property: ["abcd", "abc"],
         },
       },
-      _2: ['', 0, 3],
+      _2: ["", 0, 3],
     },
   },
   {
-    name: 'nested with movements using custom objectHash',
+    name: "nested with movements using custom objectHash",
     options: {
       objectHash(obj) {
         if (obj && obj.itemKey) {
@@ -1296,7 +1296,7 @@ examples.arrays = [
       2,
       4,
       {
-        itemKey: 'five',
+        itemKey: "five",
         width: 4,
       },
       6,
@@ -1319,7 +1319,7 @@ examples.arrays = [
       },
       4,
       {
-        itemKey: 'five',
+        itemKey: "five",
         width: 4,
       },
       6,
@@ -1329,27 +1329,27 @@ examples.arrays = [
       10,
     ],
     delta: {
-      _t: 'a',
+      _t: "a",
       2: {
         width: [10, 12],
         height: [3, 0, 0],
       },
-      _7: ['', 2, 3],
+      _7: ["", 2, 3],
     },
     reverse: {
-      _t: 'a',
+      _t: "a",
       7: {
         width: [12, 10],
         height: [3],
       },
-      _2: ['', 7, 3],
+      _2: ["", 7, 3],
     },
   },
   {
-    name: 'using property filter',
+    name: "using property filter",
     options: {
       propertyFilter(name /*, context */) {
-        return name.slice(0, 1) !== '$';
+        return name.slice(0, 1) !== "$";
       },
     },
     left: {
@@ -1379,10 +1379,10 @@ examples.arrays = [
     noPatch: true,
   },
   {
-    name: 'nested using position',
+    name: "nested using position",
     options: {
       objectHash(obj, _index, position) {
-        if (obj && obj.id && ['left', 'right'].includes(position)) {
+        if (obj && obj.id && ["left", "right"].includes(position)) {
           return obj.id;
         }
       },
@@ -1390,39 +1390,39 @@ examples.arrays = [
     left: [
       {
         id: 4,
-        pos: 'target(left)',
+        pos: "target(left)",
       },
       {
-        id: 'five',
-        pos: 'target(left)',
+        id: "five",
+        pos: "target(left)",
       },
     ],
     right: [
       {
         id: 4,
-        pos: 'source(right)',
+        pos: "source(right)",
       },
       {
-        id: 'five',
-        pos: 'source(right)',
+        id: "five",
+        pos: "source(right)",
       },
     ],
     delta: {
-      _t: 'a',
+      _t: "a",
       0: {
-        pos: ['target(left)', 'source(right)'],
+        pos: ["target(left)", "source(right)"],
       },
       1: {
-        pos: ['target(left)', 'source(right)'],
+        pos: ["target(left)", "source(right)"],
       },
     },
     reverse: {
-      _t: 'a',
+      _t: "a",
       0: {
-        pos: ['source(right)', 'target(left)'],
+        pos: ["source(right)", "target(left)"],
       },
       1: {
-        pos: ['source(right)', 'target(left)'],
+        pos: ["source(right)", "target(left)"],
       },
     },
   },
