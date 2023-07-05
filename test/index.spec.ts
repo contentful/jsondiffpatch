@@ -480,6 +480,62 @@ describe("DiffPatcher", () => {
           id,
         });
 
+        it('should move elements in the correct order and remove properties of elements', () => {
+
+          instance = new DiffPatcher({
+            objectHash(obj) {
+              if (obj && obj.id) {
+                return obj.id;
+              }
+            },
+          });
+  
+          expectFormat(
+            {
+              'hl': [
+                { id: 1, paramOne: 'bla', paramTwo: 'hello' }, // 0
+                { id: 2, paramOne: 'ga' }, // 1
+              ],
+            },
+            { 'hl': [{ id: 2, paramOne: 'ga' }, 
+            { id: 1, paramOne: 'bla' }] 
+          },
+            [
+              moveOp('/hl/1', '/hl/0'),
+              removeOp('/hl/1/paramTwo'),
+            ]);
+        });
+  
+        it('should move elements in the correct order and remove properties of elements without move operation', () => {
+  
+          instance = new DiffPatcher({
+            arrays: {
+              detectMove: false,
+              includeValueOnMove: false,
+            },
+            objectHash(obj) {
+              if (obj && obj.id) {
+                return obj.id;
+              }
+            },
+          });
+  
+          expectFormat(
+            {
+              'hl': [
+                { id: 1, paramOne: 'bla', paramTwo: 'hello' }, 
+                { id: 2, paramOne: 'ga'}
+              ],
+            },
+            { 'hl': [{ id: 2, paramOne: 'ga' }, { id: 1, paramOne: 'ga' }] },
+            [
+              removeOp('/hl/1'),
+              addOp('/hl/0', { id: 2, paramOne: 'ga'}),
+              removeOp('/hl/1/paramTwo'),
+              replaceOp('/hl/1/paramOne', 'ga'),
+            ]);
+        });
+
         it("should remove higher level first", () => {
           const before = [
             anObjectWithId("removed"),

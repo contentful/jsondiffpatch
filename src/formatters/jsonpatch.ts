@@ -168,7 +168,7 @@ const reorderOps = (diff: Patch): Patch => {
     isRemoveOp,
   ]);
   const removeOpsReverse = opsByDescendingOrder(removedOps);
-  return [...removeOpsReverse, ...moveOps, ...restOps];
+  return [  ...moveOps, ...removeOpsReverse,  ...restOps ];
 };
 
 let defaultInstance;
