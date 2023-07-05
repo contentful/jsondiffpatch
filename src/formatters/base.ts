@@ -1,3 +1,5 @@
+import { Delta, InputData } from "../types";
+
 const isArray =
   typeof Array.isArray === "function"
     ? Array.isArray
@@ -16,14 +18,14 @@ const getObjectKeys =
         return names;
       };
 
-const trimUnderscore = (str) => {
+const trimUnderscore = (str: string): string => {
   if (str.substr(0, 1) === "_") {
     return str.slice(1);
   }
   return str;
 };
 
-const arrayKeyToSortNumber = (key) => {
+const arrayKeyToSortNumber = (key: string): number => {
   if (key === "_t") {
     return -1;
   } else {
@@ -35,11 +37,12 @@ const arrayKeyToSortNumber = (key) => {
   }
 };
 
-const arrayKeyComparer = (key1, key2) =>
+const arrayKeyComparer = (key1: string, key2: string) =>
   arrayKeyToSortNumber(key1) - arrayKeyToSortNumber(key2);
 
 class BaseFormatter {
-  format(delta, left) {
+  protected includeMoveDestinations?: boolean;
+  format(delta?: Delta, left?: InputData) {
     const context = {};
     this.prepareContext(context);
     this.recurse(context, delta, left);
@@ -53,21 +56,30 @@ class BaseFormatter {
     };
   }
 
-  typeFormattterNotFound(context, deltaType) {
+  typeFormatterNotFound(context, deltaType) {
     throw new Error(`cannot format delta type: ${deltaType}`);
   }
 
-  typeFormattterErrorFormatter(context, err) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  typeFormatterErrorFormatter(context, err, ...rest) {
     return err.toString();
   }
 
-  finalize({ buffer }) {
+  finalize({ buffer }: any) {
     if (isArray(buffer)) {
       return buffer.join("");
     }
   }
 
-  recurse(context, delta, left, key, leftKey, movedFrom, isLast) {
+  recurse(
+    context: any,
+    delta?: Delta,
+    left?: InputData,
+    key?: any,
+    leftKey?: any,
+    movedFrom?: any,
+    isLast?: boolean
+  ) {
     const useMoveOriginHere = delta && movedFrom;
     const leftValue = useMoveOriginHere ? movedFrom.value : left;
 
@@ -85,11 +97,11 @@ class BaseFormatter {
       this.rootBegin(context, type, nodeType);
     }
 
-    let typeFormattter;
+    let typeFormatter;
     try {
-      typeFormattter =
-        this[`format_${type}`] || this.typeFormattterNotFound(context, type);
-      typeFormattter.call(
+      typeFormatter =
+        this[`format_${type}`] || this.typeFormatterNotFound(context, type);
+      typeFormatter.call(
         this,
         context,
         delta,
@@ -99,7 +111,7 @@ class BaseFormatter {
         movedFrom
       );
     } catch (err) {
-      this.typeFormattterErrorFormatter(
+      this.typeFormatterErrorFormatter(
         context,
         err,
         delta,
@@ -230,6 +242,7 @@ class BaseFormatter {
         pieces: [],
       };
       const location = /^(?:@@ )?[-+]?(\d+),(\d+)/.exec(line).slice(1);
+      // @ts-ignore
       lineOutput.location = {
         line: location[0],
         chr: location[1],
@@ -252,12 +265,57 @@ class BaseFormatter {
         } else if (piece.substr(0, 1) === "-") {
           pieceOutput.type = "deleted";
         }
+        // @ts-ignore
         pieceOutput.text = piece.slice(1);
         lineOutput.pieces.push(pieceOutput);
       }
       output.push(lineOutput);
     }
     return output;
+  }
+
+  protected nodeBegin(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    context: any,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    key: any,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    leftKey: any,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    type: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    nodeType: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    isLast: boolean
+  ) {
+    throw new Error("::nodeBegin Not implemented!");
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected rootBegin(context: any, type: string, nodeType: string) {
+    throw new Error("::rootBegin Not implemented!");
+  }
+
+  protected nodeEnd(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    context: any,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    key: any,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    leftKey: any,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    type: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    nodeType: string,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    isLast: boolean
+  ) {
+    throw new Error("::nodeEnd Not implemented!");
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  protected rootEnd(context: any, type: string, nodeType: string) {
+    throw new Error("::rootEnd Not implemented!");
   }
 }
 

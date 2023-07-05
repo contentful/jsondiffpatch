@@ -24,6 +24,7 @@ jobs:
       - restore_cache:
           key: dependency-cache-{{ checksum "package.json" }}
       - run: npm ci
+      - run: npm run tsc
       - run: npm run lint
   release:
     docker:

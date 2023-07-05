@@ -37,7 +37,7 @@ class ConsoleFormatter extends BaseFormatter {
     };
   }
 
-  typeFormattterErrorFormatter(context, err) {
+  typeFormatterErrorFormatter(context, err) {
     context.out(`[ERROR]${err}`);
     context.popColor();
   }

@@ -1,7 +1,7 @@
 import BaseFormatter from "./base";
 
 class HtmlFormatter extends BaseFormatter {
-  typeFormattterErrorFormatter(context, err) {
+  typeFormatterErrorFormatter(context, err) {
     context.out(`<pre class="jsondiffpatch-error">${err}</pre>`);
   }
 

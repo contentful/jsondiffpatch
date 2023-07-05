@@ -28,7 +28,7 @@ class AnnotatedFormatter extends BaseFormatter {
     };
   }
 
-  typeFormattterErrorFormatter(context, err) {
+  typeFormatterErrorFormatter(context, err) {
     context.row("", `<pre class="jsondiffpatch-error">${err}</pre>`);
   }
 

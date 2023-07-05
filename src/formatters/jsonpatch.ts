@@ -1,3 +1,4 @@
+import { Delta, InputData, Operation, Patch } from "../types";
 import BaseFormatter from "./base";
 
 const OPERATIONS = {
@@ -24,6 +25,7 @@ class JSONFormatter extends BaseFormatter {
         path: this.currentPath(),
       };
       if (typeof value !== "undefined") {
+        // @ts-ignore
         val.value = value;
       }
       this.result.push(val);
@@ -49,18 +51,19 @@ class JSONFormatter extends BaseFormatter {
     };
   }
 
-  typeFormattterErrorFormatter(context, err) {
+  typeFormatterErrorFormatter(context, err) {
     context.out(`[ERROR] ${err}`);
   }
 
-  rootBegin() {}
-  rootEnd() {}
+  protected override rootBegin() {}
 
-  nodeBegin({ path }, key, leftKey) {
+  protected override rootEnd() {}
+
+  protected override nodeBegin({ path }, key, leftKey) {
     path.push(leftKey);
   }
 
-  nodeEnd({ path }) {
+  protected override nodeEnd({ path }) {
     path.pop();
   }
 
@@ -96,10 +99,11 @@ class JSONFormatter extends BaseFormatter {
     throw new Error("Not implemented");
   }
 
-  format(delta, left) {
+  format(delta?: Delta, left?: InputData) {
     let context = {};
     this.prepareContext(context);
     this.recurse(context, delta, left);
+    // @ts-ignore
     return context.result;
   }
 }
@@ -126,7 +130,7 @@ const compareByIndexDesc = (indexA, indexB) => {
   }
 };
 
-const opsByDescendingOrder = (removeOps) =>
+const opsByDescendingOrder = (removeOps: Patch): Patch =>
   sortBy(removeOps, (a, b) => {
     const splitA = a.path.split("/");
     const splitB = b.path.split("/");
@@ -137,8 +141,9 @@ const opsByDescendingOrder = (removeOps) =>
     }
   });
 
-export const partitionOps = (arr, fns) => {
+export const partitionOps = (arr: Patch, fns) => {
   const initArr = Array(fns.length + 1)
+    // @ts-ignore
     .fill()
     .map(() => []);
   return arr
@@ -154,10 +159,10 @@ export const partitionOps = (arr, fns) => {
       return acc;
     }, initArr);
 };
-const isMoveOp = ({ op }) => op === "move";
-const isRemoveOp = ({ op }) => op === "remove";
+const isMoveOp = ({ op }: Operation): boolean => op === "move";
+const isRemoveOp = ({ op }: Operation): boolean => op === "remove";
 
-const reorderOps = (diff) => {
+const reorderOps = (diff: Patch): Patch => {
   const [moveOps, removedOps, restOps] = partitionOps(diff, [
     isMoveOp,
     isRemoveOp,
@@ -168,7 +173,7 @@ const reorderOps = (diff) => {
 
 let defaultInstance;
 
-export const format = (delta, left) => {
+export const format = (delta?: Delta, left?: InputData): Patch => {
   if (!defaultInstance) {
     defaultInstance = new JSONFormatter();
   }

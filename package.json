@@ -20,11 +20,12 @@
     "dist"
   ],
   "scripts": {
+    "tsc": "tsc",
     "build": "tsup",
     "lint": "eslint .",
     "lint-fix": "npm run lint -- --fix",
     "test": "ts-mocha -p tsconfig.json test/**/*.{js,ts}",
-    "test-watch": "npm run test -- --watch",
+    "test-watch": "npm run test -- -w --watch-files '**/*.ts'",
     "prepublish": "npm run build",
     "semantic-release": "semantic-release"
   },

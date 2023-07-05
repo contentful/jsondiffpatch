@@ -1,4 +1,12 @@
+import Context from "./contexts/context";
+import Processor from "./processor";
+
 class Pipe {
+  private readonly name: any;
+  private readonly filters: any[];
+  private processor: Processor;
+  private debug?: boolean;
+  private resultCheck: (context: Context) => void;
   constructor(name) {
     this.name = name;
     this.filters = [];
@@ -27,11 +35,11 @@ class Pipe {
     }
   }
 
-  log(msg) {
+  log(msg: any): void {
     console.log(`[jsondiffpatch] ${this.name} pipe, ${msg}`);
   }
 
-  append(...args) {
+  append(...args): Pipe {
     this.filters.push(...args);
     return this;
   }
@@ -102,7 +110,7 @@ class Pipe {
     return this;
   }
 
-  shouldHaveResult(should) {
+  shouldHaveResult(should?: boolean) {
     if (should === false) {
       this.resultCheck = null;
       return;
@@ -115,6 +123,7 @@ class Pipe {
       if (!context.hasResult) {
         console.log(context);
         let error = new Error(`${pipe.name} failed`);
+        // @ts-ignore
         error.noResult = true;
         throw error;
       }

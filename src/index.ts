@@ -1,6 +1,7 @@
 import DiffPatcher from "./diffpatcher";
+import { Delta, InputData, Options } from "./types";
 
-export { default as DiffPatcher } from "./diffpatcher";
+export { DiffPatcher } from "./diffpatcher";
 
 export * as formatters from "./formatters/index";
 
@@ -8,45 +9,43 @@ export * as console from "./formatters/console";
 
 export * from "./types";
 
-export function create(options) {
+export function create(options?: Options) {
   return new DiffPatcher(options);
 }
 
-export { default as dateReviver } from "./date-reviver";
-
 let defaultInstance;
 
-export function diff() {
+export function diff(left: InputData, right: InputData) {
   if (!defaultInstance) {
     defaultInstance = new DiffPatcher();
   }
-  return defaultInstance.diff.apply(defaultInstance, arguments);
+  return defaultInstance.diff(left, right);
 }
 
-export function patch() {
+export function patch(left: InputData, delta: Delta) {
   if (!defaultInstance) {
     defaultInstance = new DiffPatcher();
   }
-  return defaultInstance.patch.apply(defaultInstance, arguments);
+  return defaultInstance.patch(left, delta);
 }
 
-export function unpatch() {
+export function unpatch(right: InputData, delta: Delta) {
   if (!defaultInstance) {
     defaultInstance = new DiffPatcher();
   }
-  return defaultInstance.unpatch.apply(defaultInstance, arguments);
+  return defaultInstance.unpatch(right, delta);
 }
 
-export function reverse() {
+export function reverse(delta: Delta) {
   if (!defaultInstance) {
     defaultInstance = new DiffPatcher();
   }
-  return defaultInstance.reverse.apply(defaultInstance, arguments);
+  return defaultInstance.reverse(delta);
 }
 
-export function clone() {
+export function clone<T>(value: T): T {
   if (!defaultInstance) {
     defaultInstance = new DiffPatcher();
   }
-  return defaultInstance.clone.apply(defaultInstance, arguments);
+  return defaultInstance.clone(value);
 }

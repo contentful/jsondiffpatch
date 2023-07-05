@@ -1,7 +1,10 @@
+import { Delta, InputData } from "../types";
 import Context from "./context";
 
 class PatchContext extends Context {
-  constructor(left, delta) {
+  private left: InputData;
+  private delta: Delta;
+  constructor(left, delta: Delta) {
     super();
     this.left = left;
     this.delta = delta;

@@ -1,8 +1,12 @@
+import { InputData } from "../types";
 import Context from "./context";
 import defaultClone from "../clone";
 
 class DiffContext extends Context {
-  constructor(left, right) {
+  private left: InputData;
+  private right: InputData;
+
+  constructor(left: InputData, right: InputData) {
     super();
     this.left = left;
     this.right = right;
