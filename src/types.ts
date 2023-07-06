@@ -73,6 +73,6 @@ export type Options = {
   propertyFilter?: (property: string) => boolean;
   arrays?: {
     detectMove?: boolean;
-    includeValueOnMove?: false;
+    includeValueOnMove?: boolean;
   };
 };
