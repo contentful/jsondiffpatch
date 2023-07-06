@@ -8,6 +8,7 @@ import examples from "./examples/diffpatch";
 import chai from "chai";
 
 import lcs from "../src/filters/lcs";
+import { applyPatch, deepClone } from "fast-json-patch";
 
 const expect = chai.expect;
 
@@ -71,6 +72,7 @@ const arrayForEach =
           fn(array[index], index, array);
         }
       };
+
 
 describe("DiffPatcher", () => {
   arrayForEach(objectKeys(examples), (groupName) => {
@@ -392,6 +394,14 @@ describe("DiffPatcher", () => {
         const diff = instance.diff(before, after);
         const format = formatter.format(diff);
         expect(format).to.be.eql(expected);
+        const patched = applyPatch(
+          deepClone(before),
+          format,
+          true,
+          true
+        ).newDocument;
+
+        expect(patched).to.be.eql(after);
       };
 
       const removeOp = (path) => ({
