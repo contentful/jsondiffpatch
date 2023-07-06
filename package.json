@@ -24,10 +24,12 @@
     "build": "tsup",
     "lint": "eslint .",
     "lint-fix": "npm run lint -- --fix",
+    "lint-staged": "lint-staged",
     "test": "ts-mocha -p tsconfig.json test/**/*.{js,ts}",
     "test-watch": "npm run test -- -w --watch-files '**/*.ts'",
     "prepublish": "npm run build",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -52,6 +54,8 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.0",
     "fast-json-patch": "^3.1.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "mocha": "^10.2.0",
     "prettier": "^2.8.8",
     "semantic-release": "^21.0.7",
@@ -77,6 +81,11 @@
     ],
     "clean": true,
     "dts": true
+  },
+  "lint-staged": {
+    "*": [
+      "eslint --fix"
+    ]
   },
   "release": {
     "branches": [
