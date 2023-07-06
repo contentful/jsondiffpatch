@@ -191,22 +191,8 @@ export const diffFilter = function arraysDiffFilter(context) {
     }
   }
 
-  let detectMove = true;
-  if (
-    context.options &&
-    context.options.arrays &&
-    context.options.arrays.detectMove === false
-  ) {
-    detectMove = false;
-  }
-  let includeValueOnMove = false;
-  if (
-    context.options &&
-    context.options.arrays &&
-    context.options.arrays.includeValueOnMove
-  ) {
-    includeValueOnMove = true;
-  }
+  let detectMove = context.options?.arrays?.detectMove ?? true;
+  let includeValueOnMove = context.options?.arrays?.includeValueOnMove ?? false;
 
   let removedItemsLength = removedItems.length;
   for (index = commonHead; index < len2 - commonTail; index++) {
