@@ -14,4 +14,4 @@ export const diffFilter = function datesDiffFilter(context) {
     context.setResult([context.left, context.right]).exit();
   }
 };
-diffFilter.filterName = 'dates';
+diffFilter.filterName = "dates";

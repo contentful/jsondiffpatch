@@ -1,4 +1,4 @@
-import BaseFormatter from './base';
+import BaseFormatter from "./base";
 
 class AnnotatedFormatter extends BaseFormatter {
   constructor() {
@@ -8,10 +8,10 @@ class AnnotatedFormatter extends BaseFormatter {
 
   prepareContext(context) {
     super.prepareContext(context);
-    context.indent = function(levels) {
+    context.indent = function (levels) {
       this.indentLevel =
-        (this.indentLevel || 0) + (typeof levels === 'undefined' ? 1 : levels);
-      this.indentPad = new Array(this.indentLevel + 1).join('&nbsp;&nbsp;');
+        (this.indentLevel || 0) + (typeof levels === "undefined" ? 1 : levels);
+      this.indentPad = new Array(this.indentLevel + 1).join("&nbsp;&nbsp;");
     };
     context.row = (json, htmlNote) => {
       context.out(
@@ -24,12 +24,12 @@ class AnnotatedFormatter extends BaseFormatter {
       context.out(json);
       context.out('</pre></td><td class="jsondiffpatch-delta-note"><div>');
       context.out(htmlNote);
-      context.out('</div></td></tr>');
+      context.out("</div></td></tr>");
     };
   }
 
-  typeFormattterErrorFormatter(context, err) {
-    context.row('', `<pre class="jsondiffpatch-error">${err}</pre>`);
+  typeFormatterErrorFormatter(context, err) {
+    context.row("", `<pre class="jsondiffpatch-error">${err}</pre>`);
   }
 
   formatTextDiffString(context, value) {
@@ -39,11 +39,7 @@ class AnnotatedFormatter extends BaseFormatter {
       const line = lines[i];
       context.out(
         `<li><div class="jsondiffpatch-textdiff-location">` +
-          `<span class="jsondiffpatch-textdiff-line-number">${
-            line.location.line
-          }</span><span class="jsondiffpatch-textdiff-char">${
-            line.location.chr
-          }</span></div><div class="jsondiffpatch-textdiff-line">`
+          `<span class="jsondiffpatch-textdiff-line-number">${line.location.line}</span><span class="jsondiffpatch-textdiff-char">${line.location.chr}</span></div><div class="jsondiffpatch-textdiff-line">`
       );
       const pieces = line.pieces;
       for (
@@ -53,56 +49,54 @@ class AnnotatedFormatter extends BaseFormatter {
       ) {
         const piece = pieces[pieceIndex];
         context.out(
-          `<span class="jsondiffpatch-textdiff-${piece.type}">${
-            piece.text
-          }</span>`
+          `<span class="jsondiffpatch-textdiff-${piece.type}">${piece.text}</span>`
         );
       }
-      context.out('</div></li>');
+      context.out("</div></li>");
     }
-    context.out('</ul>');
+    context.out("</ul>");
   }
 
   rootBegin(context, type, nodeType) {
     context.out('<table class="jsondiffpatch-annotated-delta">');
-    if (type === 'node') {
-      context.row('{');
+    if (type === "node") {
+      context.row("{");
       context.indent();
     }
-    if (nodeType === 'array') {
+    if (nodeType === "array") {
       context.row(
         '"_t": "a",',
-        'Array delta (member names indicate array indices)'
+        "Array delta (member names indicate array indices)"
       );
     }
   }
 
   rootEnd(context, type) {
-    if (type === 'node') {
+    if (type === "node") {
       context.indent(-1);
-      context.row('}');
+      context.row("}");
     }
-    context.out('</table>');
+    context.out("</table>");
   }
 
   nodeBegin(context, key, leftKey, type, nodeType) {
     context.row(`&quot;${key}&quot;: {`);
-    if (type === 'node') {
+    if (type === "node") {
       context.indent();
     }
-    if (nodeType === 'array') {
+    if (nodeType === "array") {
       context.row(
         '"_t": "a",',
-        'Array delta (member names indicate array indices)'
+        "Array delta (member names indicate array indices)"
       );
     }
   }
 
   nodeEnd(context, key, leftKey, type, nodeType, isLast) {
-    if (type === 'node') {
+    if (type === "node") {
       context.indent(-1);
     }
-    context.row(`}${isLast ? '' : ','}`);
+    context.row(`}${isLast ? "" : ","}`);
   }
 
   /* jshint camelcase: false */
@@ -120,36 +114,36 @@ class AnnotatedFormatter extends BaseFormatter {
 
 /* eslint-enable camelcase */
 
-const wrapPropertyName = name =>
+const wrapPropertyName = (name) =>
   `<pre style="display:inline-block">&quot;${name}&quot;</pre>`;
 
 const deltaAnnotations = {
   added(delta, left, key, leftKey) {
-    const formatLegend = ' <pre>([newValue])</pre>';
-    if (typeof leftKey === 'undefined') {
+    const formatLegend = " <pre>([newValue])</pre>";
+    if (typeof leftKey === "undefined") {
       return `new value${formatLegend}`;
     }
-    if (typeof leftKey === 'number') {
+    if (typeof leftKey === "number") {
       return `insert at index ${leftKey}${formatLegend}`;
     }
     return `add property ${wrapPropertyName(leftKey)}${formatLegend}`;
   },
   modified(delta, left, key, leftKey) {
-    const formatLegend = ' <pre>([previousValue, newValue])</pre>';
-    if (typeof leftKey === 'undefined') {
+    const formatLegend = " <pre>([previousValue, newValue])</pre>";
+    if (typeof leftKey === "undefined") {
       return `modify value${formatLegend}`;
     }
-    if (typeof leftKey === 'number') {
+    if (typeof leftKey === "number") {
       return `modify at index ${leftKey}${formatLegend}`;
     }
     return `modify property ${wrapPropertyName(leftKey)}${formatLegend}`;
   },
   deleted(delta, left, key, leftKey) {
-    const formatLegend = ' <pre>([previousValue, 0, 0])</pre>';
-    if (typeof leftKey === 'undefined') {
+    const formatLegend = " <pre>([previousValue, 0, 0])</pre>";
+    if (typeof leftKey === "undefined") {
       return `delete value${formatLegend}`;
     }
-    if (typeof leftKey === 'number') {
+    if (typeof leftKey === "number") {
       return `remove index ${leftKey}${formatLegend}`;
     }
     return `delete property ${wrapPropertyName(leftKey)}${formatLegend}`;
@@ -163,11 +157,11 @@ const deltaAnnotations = {
   },
   textdiff(delta, left, key, leftKey) {
     const location =
-      typeof leftKey === 'undefined'
-        ? ''
-        : typeof leftKey === 'number'
-          ? ` at index ${leftKey}`
-          : ` at property ${wrapPropertyName(leftKey)}`;
+      typeof leftKey === "undefined"
+        ? ""
+        : typeof leftKey === "number"
+        ? ` at index ${leftKey}`
+        : ` at property ${wrapPropertyName(leftKey)}`;
     return (
       `text diff${location}, format is <a href="https://code.google.com/` +
       `p/google-diff-match-patch/wiki/Unidiff">a variation of Unidiff</a>`
@@ -175,16 +169,16 @@ const deltaAnnotations = {
   },
 };
 
-const formatAnyChange = function(context, delta) {
+const formatAnyChange = function (context, delta) {
   const deltaType = this.getDeltaType(delta);
   const annotator = deltaAnnotations[deltaType];
   const htmlNote =
     annotator &&
     annotator.apply(annotator, Array.prototype.slice.call(arguments, 1));
   let json = JSON.stringify(delta, null, 2);
-  if (deltaType === 'textdiff') {
+  if (deltaType === "textdiff") {
     // split text diffs lines
-    json = json.split('\\n').join('\\n"+\n   "');
+    json = json.split("\\n").join('\\n"+\n   "');
   }
   context.indent();
   context.row(json, htmlNote);

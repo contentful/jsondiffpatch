@@ -1,6 +1,23 @@
-import Pipe from '../pipe';
+import Pipe from "../pipe";
+import { Options } from "../types";
 
 export default class Context {
+  public hasResult: boolean;
+  public options: Options;
+  public nextAfterChildren?: any;
+  public next?: Context;
+  // What could be the result type? Delta?
+  public result: any;
+  public pipe: string;
+
+  private exiting: boolean;
+  private nextPipe: string | Pipe;
+  // There are only writes to this field :thinking_face:
+  private root: Context;
+  private parent?: Context;
+  private children: Context[];
+  private childName: string;
+
   setResult(result) {
     this.result = result;
     this.hasResult = true;
@@ -12,8 +29,9 @@ export default class Context {
     return this;
   }
 
+  // Love it when it's not used :sad_face:
   switchTo(next, pipe) {
-    if (typeof next === 'string' || next instanceof Pipe) {
+    if (typeof next === "string" || next instanceof Pipe) {
       this.nextPipe = next;
     } else {
       this.next = next;
@@ -24,9 +42,9 @@ export default class Context {
     return this;
   }
 
-  push(child, name) {
+  push(child: Context, name?: string) {
     child.parent = this;
-    if (typeof name !== 'undefined') {
+    if (typeof name !== "undefined") {
       child.childName = name;
     }
     child.root = this.root || this;

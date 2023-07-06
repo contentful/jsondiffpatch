@@ -1,4 +1,12 @@
+import Context from "./contexts/context";
+import Processor from "./processor";
+
 class Pipe {
+  private readonly name: any;
+  private readonly filters: any[];
+  private processor: Processor;
+  private debug?: boolean;
+  private resultCheck: (context: Context) => void;
   constructor(name) {
     this.name = name;
     this.filters = [];
@@ -6,7 +14,7 @@ class Pipe {
 
   process(input) {
     if (!this.processor) {
-      throw new Error('add this pipe to a processor before using it');
+      throw new Error("add this pipe to a processor before using it");
     }
     let debug = this.debug;
     let length = this.filters.length;
@@ -17,7 +25,7 @@ class Pipe {
         this.log(`filter: ${filter.filterName}`);
       }
       filter(context);
-      if (typeof context === 'object' && context.exiting) {
+      if (typeof context === "object" && context.exiting) {
         context.exiting = false;
         break;
       }
@@ -27,11 +35,11 @@ class Pipe {
     }
   }
 
-  log(msg) {
+  log(msg: any): void {
     console.log(`[jsondiffpatch] ${this.name} pipe, ${msg}`);
   }
 
-  append(...args) {
+  append(...args): Pipe {
     this.filters.push(...args);
     return this;
   }
@@ -43,7 +51,7 @@ class Pipe {
 
   indexOf(filterName) {
     if (!filterName) {
-      throw new Error('a filter name is required');
+      throw new Error("a filter name is required");
     }
     for (let index = 0; index < this.filters.length; index++) {
       let filter = this.filters[index];
@@ -55,14 +63,14 @@ class Pipe {
   }
 
   list() {
-    return this.filters.map(f => f.filterName);
+    return this.filters.map((f) => f.filterName);
   }
 
   after(filterName) {
     let index = this.indexOf(filterName);
     let params = Array.prototype.slice.call(arguments, 1);
     if (!params.length) {
-      throw new Error('a filter is required');
+      throw new Error("a filter is required");
     }
     params.unshift(index + 1, 0);
     Array.prototype.splice.apply(this.filters, params);
@@ -73,7 +81,7 @@ class Pipe {
     let index = this.indexOf(filterName);
     let params = Array.prototype.slice.call(arguments, 1);
     if (!params.length) {
-      throw new Error('a filter is required');
+      throw new Error("a filter is required");
     }
     params.unshift(index, 0);
     Array.prototype.splice.apply(this.filters, params);
@@ -84,7 +92,7 @@ class Pipe {
     let index = this.indexOf(filterName);
     let params = Array.prototype.slice.call(arguments, 1);
     if (!params.length) {
-      throw new Error('a filter is required');
+      throw new Error("a filter is required");
     }
     params.unshift(index, 1);
     Array.prototype.splice.apply(this.filters, params);
@@ -102,7 +110,7 @@ class Pipe {
     return this;
   }
 
-  shouldHaveResult(should) {
+  shouldHaveResult(should?: boolean) {
     if (should === false) {
       this.resultCheck = null;
       return;
@@ -111,10 +119,11 @@ class Pipe {
       return;
     }
     let pipe = this;
-    this.resultCheck = context => {
+    this.resultCheck = (context) => {
       if (!context.hasResult) {
         console.log(context);
         let error = new Error(`${pipe.name} failed`);
+        // @ts-ignore
         error.noResult = true;
         throw error;
       }

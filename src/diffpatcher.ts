@@ -1,21 +1,24 @@
-import Processor from './processor';
-import Pipe from './pipe';
-import DiffContext from './contexts/diff';
-import PatchContext from './contexts/patch';
-import ReverseContext from './contexts/reverse';
-import clone from './clone';
+import Processor from "./processor";
+import Pipe from "./pipe";
+import DiffContext from "./contexts/diff";
+import PatchContext from "./contexts/patch";
+import ReverseContext from "./contexts/reverse";
+import clone from "./clone";
 
-import * as trivial from './filters/trivial';
-import * as nested from './filters/nested';
-import * as arrays from './filters/arrays';
-import * as dates from './filters/dates';
-import * as texts from './filters/texts';
+import * as trivial from "./filters/trivial";
+import * as nested from "./filters/nested";
+import * as arrays from "./filters/arrays";
+import * as dates from "./filters/dates";
+import * as texts from "./filters/texts";
+import { Delta, InputData, Options } from "./types";
 
-class DiffPatcher {
-  constructor(options) {
+export class DiffPatcher {
+  private processor: Processor;
+
+  constructor(options: Options = {}) {
     this.processor = new Processor(options);
     this.processor.pipe(
-      new Pipe('diff')
+      new Pipe("diff")
         .append(
           nested.collectChildrenDiffFilter,
           trivial.diffFilter,
@@ -27,7 +30,7 @@ class DiffPatcher {
         .shouldHaveResult()
     );
     this.processor.pipe(
-      new Pipe('patch')
+      new Pipe("patch")
         .append(
           nested.collectChildrenPatchFilter,
           arrays.collectChildrenPatchFilter,
@@ -39,7 +42,7 @@ class DiffPatcher {
         .shouldHaveResult()
     );
     this.processor.pipe(
-      new Pipe('reverse')
+      new Pipe("reverse")
         .append(
           nested.collectChildrenReverseFilter,
           arrays.collectChildrenReverseFilter,
@@ -52,27 +55,27 @@ class DiffPatcher {
     );
   }
 
-  options(...args) {
+  options(...args): Options {
     return this.processor.options(...args);
   }
 
-  diff(left, right) {
+  diff(left: InputData, right: InputData) {
     return this.processor.process(new DiffContext(left, right));
   }
 
-  patch(left, delta) {
+  patch(left: InputData, delta: Delta) {
     return this.processor.process(new PatchContext(left, delta));
   }
 
-  reverse(delta) {
+  reverse(delta: Delta) {
     return this.processor.process(new ReverseContext(delta));
   }
 
-  unpatch(right, delta) {
+  unpatch(right: InputData, delta: Delta) {
     return this.patch(right, this.reverse(delta));
   }
 
-  clone(value) {
+  clone<T>(value: T): T {
     return clone(value);
   }
 }

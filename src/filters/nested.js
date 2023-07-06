@@ -1,6 +1,6 @@
-import DiffContext from '../contexts/diff';
-import PatchContext from '../contexts/patch';
-import ReverseContext from '../contexts/reverse';
+import DiffContext from "../contexts/diff";
+import PatchContext from "../contexts/patch";
+import ReverseContext from "../contexts/reverse";
 
 export function collectChildrenDiffFilter(context) {
   if (!context || !context.children) {
@@ -11,21 +11,21 @@ export function collectChildrenDiffFilter(context) {
   let result = context.result;
   for (let index = 0; index < length; index++) {
     child = context.children[index];
-    if (typeof child.result === 'undefined') {
+    if (typeof child.result === "undefined") {
       continue;
     }
     result = result || {};
     result[child.childName] = child.result;
   }
   if (result && context.leftIsArray) {
-    result._t = 'a';
+    result._t = "a";
   }
   context.setResult(result).exit();
 }
-collectChildrenDiffFilter.filterName = 'collectChildren';
+collectChildrenDiffFilter.filterName = "collectChildren";
 
 export function objectsDiffFilter(context) {
-  if (context.leftIsArray || context.leftType !== 'object') {
+  if (context.leftIsArray || context.leftType !== "object") {
     return;
   }
 
@@ -49,7 +49,7 @@ export function objectsDiffFilter(context) {
     if (propertyFilter && !propertyFilter(name, context)) {
       continue;
     }
-    if (typeof context.left[name] === 'undefined') {
+    if (typeof context.left[name] === "undefined") {
       child = new DiffContext(undefined, context.right[name]);
       context.push(child, name);
     }
@@ -61,7 +61,7 @@ export function objectsDiffFilter(context) {
   }
   context.exit();
 }
-objectsDiffFilter.filterName = 'objects';
+objectsDiffFilter.filterName = "objects";
 
 export const patchFilter = function nestedPatchFilter(context) {
   if (!context.nested) {
@@ -78,7 +78,7 @@ export const patchFilter = function nestedPatchFilter(context) {
   }
   context.exit();
 };
-patchFilter.filterName = 'objects';
+patchFilter.filterName = "objects";
 
 export const collectChildrenPatchFilter = function collectChildrenPatchFilter(
   context
@@ -104,7 +104,7 @@ export const collectChildrenPatchFilter = function collectChildrenPatchFilter(
   }
   context.setResult(context.left).exit();
 };
-collectChildrenPatchFilter.filterName = 'collectChildren';
+collectChildrenPatchFilter.filterName = "collectChildren";
 
 export const reverseFilter = function nestedReverseFilter(context) {
   if (!context.nested) {
@@ -121,7 +121,7 @@ export const reverseFilter = function nestedReverseFilter(context) {
   }
   context.exit();
 };
-reverseFilter.filterName = 'objects';
+reverseFilter.filterName = "objects";
 
 export function collectChildrenReverseFilter(context) {
   if (!context || !context.children) {
@@ -141,4 +141,4 @@ export function collectChildrenReverseFilter(context) {
   }
   context.setResult(delta).exit();
 }
-collectChildrenReverseFilter.filterName = 'collectChildren';
+collectChildrenReverseFilter.filterName = "collectChildren";
