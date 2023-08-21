@@ -50,7 +50,7 @@
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
     "chai": "^4.3.7",
-    "eslint": "^8.44.0",
+    "eslint": "^8.47.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.0",
     "fast-json-patch": "^3.1.1",
