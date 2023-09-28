@@ -45,11 +45,11 @@
   },
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.3",
-    "@types/chai": "^4.3.5",
+    "@types/chai": "^4.3.6",
     "@types/mocha": "^10.0.1",
     "@typescript-eslint/eslint-plugin": "^5.52.0",
     "@typescript-eslint/parser": "^5.52.0",
-    "chai": "^4.3.7",
+    "chai": "^4.3.9",
     "eslint": "^8.44.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.0",
