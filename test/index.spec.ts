@@ -9,6 +9,7 @@ import chai from "chai";
 
 import lcs from "../src/filters/lcs";
 import { applyPatch, deepClone } from "fast-json-patch";
+import crypto from 'crypto';
 
 const expect = chai.expect;
 
@@ -87,7 +88,7 @@ describe("DiffPatcher", () => {
           `${valueDescription(example.left)} -> ${valueDescription(
             example.right
           )}`;
-        describe.only(name, () => {
+        describe(name, () => {
           before(function () {
             this.instance = new DiffPatcher(example.options);
           });
@@ -393,6 +394,7 @@ describe("DiffPatcher", () => {
       const expectFormat = (before, after, expected) => {
         const diff = instance.diff(before, after);
         const format = formatter.format(diff);
+        console.log("patch:", JSON.stringify(format, null, 2))
         expect(format).to.be.eql(expected);
         const patched = applyPatch(
           deepClone(before),
@@ -466,7 +468,7 @@ describe("DiffPatcher", () => {
       });
 
       describe("patcher with comparator", () => {
-        before(() => {
+        beforeEach(() => {
           instance = new DiffPatcher({
             objectHash(obj) {
               if (obj && obj.id) {
@@ -478,6 +480,63 @@ describe("DiffPatcher", () => {
 
         const anObjectWithId = (id) => ({
           id,
+        });
+
+        it.only('should move elements in the correct order and remove properties of elements', () => {
+
+          instance = new DiffPatcher({
+            objectHash(obj) {
+              if (obj && obj.id) {
+                return obj.id;
+              }
+            },
+          });
+  
+          expectFormat(
+            {
+              'hl': [
+                { id: 1, paramOne: 'bla', paramTwo: 'hello' }, // 0
+                { id: 2, paramOne: 'ga' }, // 1
+              ],
+            },
+            { 'hl': [{ id: 2, paramOne: 'ga' }, 
+            { id: 1, paramOne: 'bla' }] 
+          },
+            [
+              moveOp('/hl/1', '/hl/0'),
+              removeOp('/hl/1/paramTwo'),
+            ]);
+        });
+
+        it.only('should move elements in the correct order and remove properties of elements without move operation', () => {
+  
+          instance = new DiffPatcher({
+            arrays: {
+              detectMove: false,
+              includeValueOnMove: false,
+            },
+            objectHash(obj) {
+              const str = JSON.stringify(obj, Object.keys(obj).sort());
+              const hash = crypto.createHash('md5').update(str).digest('hex');
+              return hash;
+            },
+          });
+  
+          expectFormat(
+            {
+              'hl': [
+                { id: 1, paramOne: 'bla', paramTwo: 'hello' }, 
+                { id: 2, paramOne: 'ga'}
+              ],
+            },
+            { 'hl': [{ id: 2, paramOne: 'ga' }, { id: 1, paramOne: 'ga' }] },
+            [
+              removeOp('/hl/0'),
+              addOp('/hl/1', {
+                "id": 1,
+                "paramOne": "ga"
+              })           
+            ]);
         });
 
         it("should remove higher level first", () => {
